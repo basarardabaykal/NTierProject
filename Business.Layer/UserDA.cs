@@ -1,0 +1,41 @@
+﻿
+    using DataLayer;
+    using Microsoft.Identity.Client;
+
+    namespace DataLayer
+    {
+        public class UserDA
+        {
+            private readonly UserRepository _repo;
+            public string Name { get; set; }
+            public string TCNumber { get; set; }
+
+            public UserDA(UserRepository repo)
+            {
+                _repo = repo;
+            }
+
+            public async Task LoadData(int id)
+            {
+                var db = await _repo.GetUsers(id);
+
+                var item = db.FirstOrDefault(x => x.id == id);
+                if (item == null)
+                {
+                    Console.WriteLine("Bu ID'ye sahip bir kullanıcı bulunamadı.");
+                    return;
+                }
+
+                Name = item.name;
+                TCNumber = item.tcnumber;
+            }
+
+
+            public async Task SendData(UserDTO dto)
+            {
+                DBItem Item = new DBItem(dto.name, dto.tcnumber);
+                await _repo.SetUser(Item);
+            }
+
+    }
+    }
