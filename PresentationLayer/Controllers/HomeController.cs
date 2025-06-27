@@ -12,8 +12,8 @@ namespace NTierProject.Controllers
     public class HomeController : Controller
     {
 
-        private readonly UserDbService _userDA;
-        public HomeController(UserDbService userDA)
+        private readonly IUserDbService _userDA;
+        public HomeController(IUserDbService userDA)
         {
             _userDA = userDA;
         }
