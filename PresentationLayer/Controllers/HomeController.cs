@@ -12,24 +12,24 @@ namespace NTierProject.Controllers
     public class HomeController : Controller
     {
 
-        private readonly IUserDbService _userDA;
+        private readonly IUserDbService _userDbService;
         public HomeController(IUserDbService userDA)
         {
-            _userDA = userDA;
+            _userDbService = userDA;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            await _userDA.LoadData(id);
-            return Ok(_userDA);
+            await _userDbService.LoadData(id);
+            return Ok(_userDbService);
         }
 
 
         [HttpPost("add")]
         public async Task<IActionResult> AddUser([FromBody] UserDTO userDTO)
         {
-            await _userDA.SendData(userDTO);
+            await _userDbService.SendData(userDTO);
             return Ok("Kayıt başarıyla tamamlandı.");
         }
 
