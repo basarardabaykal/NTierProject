@@ -1,7 +1,8 @@
-using DataLayer;
 using BusinessLayer.Congrate.Repository;
-using Microsoft.Extensions.Options;
+using BusinessLayer.Services.DbServices;
+using DataLayer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ builder.Services.AddControllers().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<UserDA>();
+builder.Services.AddScoped<UserDbService>();
 
 
 //builder.Services.AddOpenApi();

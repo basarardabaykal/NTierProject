@@ -1,6 +1,8 @@
 ﻿using DataLayer;
 using NTierProject;
 using Microsoft.AspNetCore.Mvc;
+using CoreLayer;
+using BusinessLayer.Services.DbServices;
 
 namespace NTierProject.Controllers
 {
@@ -10,8 +12,8 @@ namespace NTierProject.Controllers
     public class HomeController : Controller
     {
 
-        private readonly UserDA _userDA;
-        public HomeController(UserDA userDA)
+        private readonly UserDbService _userDA;
+        public HomeController(UserDbService userDA)
         {
             _userDA = userDA;
         }
