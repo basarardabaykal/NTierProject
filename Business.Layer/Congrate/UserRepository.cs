@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using DataLayer;
 
 
-namespace DataLayer
+namespace BusinessLayer.Congrate
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
 
         private readonly UserDBContext _dbContext;

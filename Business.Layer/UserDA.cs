@@ -1,6 +1,7 @@
 ﻿
     using DataLayer;
     using Microsoft.Identity.Client;
+    using BusinessLayer.Congrate;
 
     namespace DataLayer
     {
