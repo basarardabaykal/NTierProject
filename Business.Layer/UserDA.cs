@@ -7,11 +7,11 @@
     {
         public class UserDA
         {
-            private readonly UserRepository _repo;
+            private readonly IUserRepository _repo;
             public string Name { get; set; }
             public string TCNumber { get; set; }
 
-            public UserDA(UserRepository repo)
+            public UserDA(IUserRepository repo)
             {
                 _repo = repo;
             }

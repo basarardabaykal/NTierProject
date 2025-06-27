@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate
 {
-    internal interface IUserRepository
+    public interface IUserRepository
     {
         public Task<List<DBItem>> GetUsers(int id);
 
