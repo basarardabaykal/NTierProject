@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using DataLayer;
+using BusinessLayer.Congrate.Repository;
 
 
-namespace BusinessLayer.Congrate
+namespace BusinessLayer.Congrate.Repository
 {
     public class UserRepository : IUserRepository
     {

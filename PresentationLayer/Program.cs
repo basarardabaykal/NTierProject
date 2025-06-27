@@ -1,5 +1,5 @@
 using DataLayer;
-using BusinessLayer.Congrate;
+using BusinessLayer.Congrate.Repository;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 

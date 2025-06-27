@@ -1,9 +1,9 @@
 ﻿
-    using DataLayer;
-    using Microsoft.Identity.Client;
-    using BusinessLayer.Congrate;
+using DataLayer;
+using Microsoft.Identity.Client;
+using BusinessLayer.Congrate.Repository;
 
-    namespace DataLayer
+namespace DataLayer
     {
         public class UserDA
         {

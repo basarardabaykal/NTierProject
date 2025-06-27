@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Congrate
+namespace BusinessLayer.Congrate.Repository
 {
     public interface IUserRepository
     {
