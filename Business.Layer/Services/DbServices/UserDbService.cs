@@ -1,34 +1,36 @@
 ﻿using Microsoft.Identity.Client;
 using BusinessLayer.Congrate.Repository;
-using CoreLayer;
-using DataLayer;
+using BusinessLayer.Dto;
+using CoreLayer.Entity;
+using BusinessLayer.Congrate.Services.DbServices;
 
 namespace BusinessLayer.Services.DbServices
 {
     public class UserDbService : IUserDbService
     {
         private readonly IUserRepository _repo;
-        public string Name { get; set; }
-        public string TCNumber { get; set; }
+   
 
         public UserDbService(IUserRepository repo)
         {
             _repo = repo;
         }
 
-        public async Task LoadData(int id)
+        public async Task<UserDTO> LoadData(int id)
         {
-            var db = await _repo.GetUsers(id);
-
-            var item = db.FirstOrDefault(x => x.id == id);
+            var item = await _repo.GetUser(id);
             if (item == null)
             {
                 Console.WriteLine("Bu ID'ye sahip bir kullanıcı bulunamadı.");
-                return;
+                return new UserDTO() { };
             }
+            var dto = new UserDTO()
+            {
+                name = item.name,
+                tcnumber = item.tcnumber
+            };
+            return dto;
 
-            Name = item.name;
-            TCNumber = item.tcnumber;
         }
 
 

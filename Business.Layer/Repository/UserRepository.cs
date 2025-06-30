@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using DataLayer;
 using BusinessLayer.Congrate.Repository;
+using CoreLayer.Entity;
 
 
-namespace BusinessLayer.Congrate.Repository
+
+namespace BusinessLayer.Repository
 {
     public class UserRepository : IUserRepository
     {
@@ -21,10 +23,9 @@ namespace BusinessLayer.Congrate.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<List<DBItem>> GetUsers(int id)
+        public async Task<DBItem> GetUser(int id)
         {
-            var users = await _dbContext.users.ToListAsync();
-            return users;
+            return await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
         }
 
         public async Task SetUser(DBItem user)

@@ -2,7 +2,9 @@
 using NTierProject;
 using Microsoft.AspNetCore.Mvc;
 using CoreLayer;
-using BusinessLayer.Services.DbServices;
+using BusinessLayer.Dto;
+using BusinessLayer.Congrate.Services.DbServices;
+
 
 namespace NTierProject.Controllers
 {
@@ -21,8 +23,8 @@ namespace NTierProject.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            await _userDbService.LoadData(id);
-            return Ok(_userDbService);
+            var userDto = await _userDbService.LoadData(id);
+            return Ok(userDto);
         }
 
 
