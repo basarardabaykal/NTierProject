@@ -17,12 +17,5 @@ namespace CoreLayer.Entity
             this.name = name;
             this.tcnumber = tcnumber;
         }
-        public DBItem(int iD, string name, string tcnumber)
-        {
-            this.id = iD;
-            this.name = name;
-            this.tcnumber = tcnumber;
-        }
-
     }
 }
