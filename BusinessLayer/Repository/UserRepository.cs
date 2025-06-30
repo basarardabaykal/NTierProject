@@ -23,12 +23,12 @@ namespace BusinessLayer.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<DBItem> GetUser(int id)
+        public async Task<User> GetUser(int id)
         {
             return await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
         }
 
-        public async Task SetUser(DBItem user)
+        public async Task SetUser(User user)
         {
 
             await _dbContext.users.AddAsync(user);

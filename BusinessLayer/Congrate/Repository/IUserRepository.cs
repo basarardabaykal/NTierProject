@@ -10,9 +10,9 @@ namespace BusinessLayer.Congrate.Repository
 {
     public interface IUserRepository
     {
-        public Task<DBItem> GetUser(int id);
+        public Task<User> GetUser(int id);
 
-        public Task SetUser(DBItem user);
+        public Task SetUser(User user);
     }
     
 }

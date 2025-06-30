@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace CoreLayer.Entity
 {
-    public class DBItem
+    public class User
     {
         public int id { get; set; }
         public string name { get; set; }
         public string tcnumber { get; set; }
 
-        public DBItem(string name, string tcnumber)
+        public User(string name, string tcnumber)
         {
             this.name = name;
             this.tcnumber = tcnumber;

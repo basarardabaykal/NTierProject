@@ -11,7 +11,7 @@ namespace DataLayer
 {
     public class UserDBContext : DbContext
     {
-        public DbSet<DBItem> users { get; set; }
+        public DbSet<User> users { get; set; }
 
         public UserDBContext()
         {

@@ -36,7 +36,7 @@ namespace BusinessLayer.Services.DbServices
 
         public async Task SendData(UserDTO dto)
         {
-            DBItem Item = new DBItem(dto.name, dto.tcnumber);
+            User Item = new User(dto.name, dto.tcnumber);
             await _repo.SetUser(Item);
         }
 
