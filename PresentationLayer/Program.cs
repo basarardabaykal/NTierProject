@@ -13,7 +13,7 @@ builder.Services.AddControllers().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<UserDbService>();
+builder.Services.AddScoped<IUserDbService, UserDbService>();
 
 
 //builder.Services.AddOpenApi();

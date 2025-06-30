@@ -5,7 +5,7 @@ using DataLayer;
 
 namespace BusinessLayer.Services.DbServices
 {
-    public class UserDbService
+    public class UserDbService : IUserDbService
     {
         private readonly IUserRepository _repo;
         public string Name { get; set; }
