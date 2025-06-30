@@ -13,9 +13,9 @@ namespace DataLayer
     {
         public DbSet<DBItem> users { get; set; }
 
-        public UserDBContext()
+        /*public UserDBContext()
         {
-        }
+        }*/
 
         public UserDBContext(DbContextOptions<UserDBContext> options)
         : base(options)

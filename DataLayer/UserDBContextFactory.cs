@@ -14,9 +14,8 @@ namespace DataLayer
     {
         public UserDBContext CreateDbContext(string[] args)
         {
-            // Load configuration from appsettings.json
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory()) // Points to your project root
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "..", "PresentationLayer"))
                 .AddJsonFile("appsettings.json")
                 .Build();
 
