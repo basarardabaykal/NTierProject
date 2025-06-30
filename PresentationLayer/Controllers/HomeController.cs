@@ -31,8 +31,16 @@ namespace NTierProject.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddUser([FromBody] UserDTO userDTO)
         {
-            await _userDbService.SendData(userDTO);
-            return Ok("Kayıt başarıyla tamamlandı.");
+            if (ModelState.IsValid)
+            {
+                await _userDbService.SendData(userDTO);
+                return Ok("Kayıt başarıyla tamamlandı.");
+            }
+            else
+            {
+                return Ok("Kayıt esnasında bir hatayla karşılaşıldı.");
+            }
+            
         }
 
     }

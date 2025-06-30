@@ -2,6 +2,7 @@ using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Congrate.Services.DbServices;
 using BusinessLayer.Repository;
 using BusinessLayer.Services.DbServices;
+using BusinessLayer.Validations;
 using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
@@ -23,7 +24,7 @@ builder.Services.AddScoped<IUserDbService, UserDbService>();
 //fluent validation
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
-builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+builder.Services.AddValidatorsFromAssembly(typeof(UserValidator).Assembly);
 
 
 //builder.Services.AddOpenApi();

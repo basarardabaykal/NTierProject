@@ -12,7 +12,19 @@ namespace BusinessLayer.Validations
     {
         public UserValidator() 
         {
+            RuleFor(x => x.name).NotNull().WithMessage("Lütfen adınızı giriniz.").Must(beStringOnly).WithMessage("Lütfen geçerli bir ad giriniz.");
+            RuleFor(x => x.tcnumber).NotNull().WithMessage("Lütfen TC numaranızı giriniz.").Length(11).WithMessage("Lütfen geçerli bir TC giriniz.");
 
+        }
+
+        private bool beStringOnly(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return false;
+
+            else
+            {
+                return value.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
+            }       
         }
     }
 }
