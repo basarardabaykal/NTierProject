@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace NTierProject.Middlewares
 {
@@ -22,6 +23,17 @@ namespace NTierProject.Middlewares
             catch (Exception exception)
             {
                 _logger.LogInformation("Bir hatayla karşılaşıldı: " + exception.Message);
+
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+                var response = new
+                {
+                    status = 500,
+                    error = "Bir hatayla karşılaşıldı.",
+                };
+
+                await context.Response.WriteAsync(JsonSerializer.Serialize(response));
             }
         }
     }
