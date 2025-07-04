@@ -1,15 +1,16 @@
-﻿using System.Net;
-using System.Text.Json;
+﻿using Microsoft.Extensions.Logging;
 
 namespace NTierProject.Middlewares
 {
     public class GlobalExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<GlobalExceptionHandlerMiddleware> _logger;
 
-        public GlobalExceptionHandlerMiddleware(RequestDelegate next)
+        public GlobalExceptionHandlerMiddleware(RequestDelegate next , ILogger<GlobalExceptionHandlerMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -20,8 +21,7 @@ namespace NTierProject.Middlewares
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Bir hatayla karşılaşıldı: " + exception.Message);
-
+                _logger.LogInformation("Bir hatayla karşılaşıldı: " + exception.Message);
             }
         }
     }

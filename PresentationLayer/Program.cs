@@ -14,6 +14,13 @@ using Microsoft.EntityFrameworkCore;
 using NTierProject.Controllers;
 using NTierProject.Middlewares;
 using System.Reflection;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .Enrich.FromLogContext()
+    .MinimumLevel.Debug()
+    .CreateLogger();
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +51,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//serilog
+builder.Host.UseSerilog();
+
 var app = builder.Build();
 
 //global exception handler
@@ -62,4 +72,20 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run(); 
+app.Run();
+
+
+
+try
+{
+    Log.Information("Starting up the app");
+    app.Run();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "App terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
