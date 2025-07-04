@@ -22,12 +22,7 @@ namespace BusinessLayer.Services.ControllerServices
 
         public async Task<UserDTO> GetUser(int id)
         {
-            var item = await _userDbService.GetUser(id);
-            var dto = new UserDTO()
-            {
-                name = item.name,
-                tcnumber = item.tcnumber
-            };
+            var dto = await _userDbService.GetUser(id);
             return dto;
 
         }

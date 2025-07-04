@@ -27,7 +27,7 @@ namespace BusinessLayer.Services.DbServices
             var dto = new UserDTO()
             {
                 name = item.name,
-                tcnumber = item.tcnumber
+                tcnumber = item.tcnumber // Bu kısımda mapper kullanılacak.
             };
             return dto;
 
