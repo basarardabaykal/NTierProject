@@ -16,7 +16,7 @@ namespace BusinessLayer.Services.DbServices
             _repo = repo;
         }
 
-        public async Task<UserDTO> LoadData(int id)
+        public async Task<UserDTO> GetUser(int id)
         {
             var item = await _repo.GetUser(id);
             if (item == null)
@@ -34,10 +34,10 @@ namespace BusinessLayer.Services.DbServices
         }
 
 
-        public async Task SendData(UserDTO dto)
+        public async Task AddUser(UserDTO dto)
         {
             User Item = new User(dto.name, dto.tcnumber);
-            await _repo.SetUser(Item);
+            await _repo.AddUser(Item);
         }
 
     }

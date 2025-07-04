@@ -1,17 +1,16 @@
-﻿using CoreLayer;
+﻿using BusinessLayer.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer.Dto;
 
-namespace BusinessLayer.Congrate.Services.DbServices
+namespace BusinessLayer.Congrate.Services.ControllerServices
 {
-    public interface IUserDbService
+    public interface IControllerService
     {
         public Task<UserDTO> GetUser(int id);
+        public Task AddUser(UserDTO dto); 
 
-        public Task AddUser(UserDTO userDTO);
     }
 }

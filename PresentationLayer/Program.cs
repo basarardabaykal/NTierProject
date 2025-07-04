@@ -1,5 +1,7 @@
 using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Congrate.Services.DbServices;
+using BusinessLayer.Congrate.Services.ControllerServices;
+using BusinessLayer.Services.ControllerServices;
 using BusinessLayer.Repository;
 using BusinessLayer.Services.DbServices;
 using BusinessLayer.Validations;
@@ -8,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using System.Reflection;
 using FluentValidation;
+using NTierProject.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +23,7 @@ builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserDbService, UserDbService>();
+builder.Services.AddScoped<IControllerService, HomeControllerService>();
 
 //fluent validation
 builder.Services.AddFluentValidationAutoValidation();

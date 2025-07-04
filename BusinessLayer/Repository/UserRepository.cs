@@ -28,7 +28,7 @@ namespace BusinessLayer.Repository
             return await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
         }
 
-        public async Task SetUser(User user)
+        public async Task AddUser(User user)
         {
 
             await _dbContext.users.AddAsync(user);

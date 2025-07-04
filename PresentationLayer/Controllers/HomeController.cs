@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using CoreLayer;
 using BusinessLayer.Dto;
 using BusinessLayer.Congrate.Services.DbServices;
+using BusinessLayer.Congrate.Services.ControllerServices;
 
 
 namespace NTierProject.Controllers
@@ -14,16 +15,16 @@ namespace NTierProject.Controllers
     public class HomeController : Controller
     {
 
-        private readonly IUserDbService _userDbService;
-        public HomeController(IUserDbService userDA)
+        private readonly IControllerService _controllerService;
+        public HomeController(IControllerService controllerService)
         {
-            _userDbService = userDA;
+            _controllerService = controllerService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            var userDto = await _userDbService.LoadData(id);
+            var userDto = await _controllerService.GetUser(id);
             return Ok(userDto);
         }
 
@@ -33,7 +34,7 @@ namespace NTierProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _userDbService.SendData(userDTO);
+                await _controllerService.AddUser(userDTO);
                 return Ok("Kayıt başarıyla tamamlandı.");
             }
             else

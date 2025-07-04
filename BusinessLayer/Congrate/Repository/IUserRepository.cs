@@ -12,7 +12,7 @@ namespace BusinessLayer.Congrate.Repository
     {
         public Task<User> GetUser(int id);
 
-        public Task SetUser(User user);
+        public Task AddUser(User user);
     }
     
 }
