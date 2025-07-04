@@ -35,7 +35,7 @@ namespace BusinessLayer.Services.DbServices
 
         public async Task AddUser(UserDTO dto)
         {
-            User Item = new User(dto.name, dto.tcnumber);
+            User Item = _mapper.Map<User>(dto);
             await _repo.AddUser(Item);
         }
 
