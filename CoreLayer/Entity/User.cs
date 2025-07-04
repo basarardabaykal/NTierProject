@@ -12,10 +12,5 @@ namespace CoreLayer.Entity
         public string name { get; set; }
         public string tcnumber { get; set; }
 
-        public User(string name, string tcnumber)
-        {
-            this.name = name;
-            this.tcnumber = tcnumber;
-        }
     }
 }
