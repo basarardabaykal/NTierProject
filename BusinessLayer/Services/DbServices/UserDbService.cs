@@ -3,17 +3,20 @@ using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Dto;
 using CoreLayer.Entity;
 using BusinessLayer.Congrate.Services.DbServices;
+using AutoMapper;
 
 namespace BusinessLayer.Services.DbServices
 {
     public class UserDbService : IUserDbService
     {
         private readonly IUserRepository _repo;
+        private readonly IMapper _mapper;
    
 
-        public UserDbService(IUserRepository repo)
+        public UserDbService(IUserRepository repo, IMapper mapper)
         {
             _repo = repo;
+            _mapper = mapper;
         }
 
         public async Task<UserDTO> GetUser(int id)
@@ -24,11 +27,7 @@ namespace BusinessLayer.Services.DbServices
                 Console.WriteLine("Bu ID'ye sahip bir kullanıcı bulunamadı.");
                 return new UserDTO() { };
             }
-            var dto = new UserDTO()
-            {
-                name = item.name,
-                tcnumber = item.tcnumber // Bu kısımda mapper kullanılacak.
-            };
+            var dto = _mapper.Map<UserDTO>(item);
             return dto;
 
         }

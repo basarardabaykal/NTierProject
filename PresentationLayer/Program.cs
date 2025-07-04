@@ -5,12 +5,14 @@ using BusinessLayer.Services.ControllerServices;
 using BusinessLayer.Repository;
 using BusinessLayer.Services.DbServices;
 using BusinessLayer.Validations;
+using BusinessLayer.Profiles;
 using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using System.Reflection;
 using FluentValidation;
 using NTierProject.Controllers;
+using AutoMapper;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +32,8 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssembly(typeof(UserValidator).Assembly);
 
+//automapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //builder.Services.AddOpenApi();
 
