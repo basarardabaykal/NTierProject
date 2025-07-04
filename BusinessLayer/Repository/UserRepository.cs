@@ -25,6 +25,7 @@ namespace BusinessLayer.Repository
 
         public async Task<User> GetUser(int id)
         {
+            throw new Exception("Deneme hatası");
             return await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
         }
 

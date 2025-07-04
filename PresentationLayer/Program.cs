@@ -1,18 +1,19 @@
+using AutoMapper;
 using BusinessLayer.Congrate.Repository;
-using BusinessLayer.Congrate.Services.DbServices;
 using BusinessLayer.Congrate.Services.ControllerServices;
-using BusinessLayer.Services.ControllerServices;
+using BusinessLayer.Congrate.Services.DbServices;
+using BusinessLayer.Profiles;
 using BusinessLayer.Repository;
+using BusinessLayer.Services.ControllerServices;
 using BusinessLayer.Services.DbServices;
 using BusinessLayer.Validations;
-using BusinessLayer.Profiles;
 using DataLayer;
-using Microsoft.EntityFrameworkCore;
-using FluentValidation.AspNetCore;
-using System.Reflection;
 using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using NTierProject.Controllers;
-using AutoMapper;
+using NTierProject.Middlewares;
+using System.Reflection;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(UserValidator).Assembly);
 //automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+
 //builder.Services.AddOpenApi();
 
 
@@ -43,6 +45,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//global exception handler
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
