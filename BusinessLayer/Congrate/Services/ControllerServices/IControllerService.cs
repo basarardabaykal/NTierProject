@@ -11,7 +11,7 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
     public interface IControllerService
     {
       
-        Task<IDataResult<UserDTO>> GetUser(int id);
+        Task<IDataResult<UserDTO>> GetUser(string id);
 
         public Task AddUser(UserDTO dto); 
 

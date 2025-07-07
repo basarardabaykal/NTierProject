@@ -24,7 +24,7 @@ namespace BusinessLayer.Services.ControllerServices
         }
 
 
-        public async Task<IDataResult<UserDTO>> GetUser(int id)
+        public async Task<IDataResult<UserDTO>> GetUser(string id)
 
         {
             return await _userDbService.GetUser(id);
