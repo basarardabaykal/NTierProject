@@ -15,10 +15,8 @@ namespace BusinessLayer.Profiles
         public UserProfile()
         {
             CreateMap<AppUser, UserDTO>()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Firstname + " " + src.Lastname))
-                .ReverseMap()
-                .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.Name.Substring(0, src.Name.LastIndexOf(" "))))
-                .ForMember(dest => dest.Lastname, opt => opt.MapFrom(src => src.Name.Split(new[] { ' ' })[src.Name.Split(new[] { ' ' }).Length - 1]));
+
+                .ReverseMap();
 
            //this parsing works with any number of names and a single word surname.
         }

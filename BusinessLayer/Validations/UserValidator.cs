@@ -12,7 +12,8 @@ namespace BusinessLayer.Validations
     {
         public UserValidator() 
         {
-            RuleFor(x => x.Name).NotNull().WithMessage("Lütfen adınızı giriniz.").Must(beStringOnly).WithMessage("Lütfen geçerli bir ad giriniz.");
+            RuleFor(x => x.Firstname).NotNull().WithMessage("Lütfen adınızı giriniz.").Must(beStringOnly).WithMessage("Lütfen geçerli bir ad giriniz.");
+            RuleFor(x => x.Lastname).NotNull().WithMessage("Lütfen adınızı giriniz.").Must(beStringOnly).WithMessage("Lütfen geçerli bir ad giriniz.");
             RuleFor(x => x.Tcnumber).NotNull().WithMessage("Lütfen TC numaranızı giriniz.").Length(11).WithMessage("Lütfen geçerli bir TC giriniz.");
 
         }
