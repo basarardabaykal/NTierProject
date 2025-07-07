@@ -8,7 +8,8 @@ using Npgsql;
 using DataLayer;
 using BusinessLayer.Congrate.Repository;
 using CoreLayer.Entity;
-
+using CoreLayer.Utilities.Interfaces;
+using CoreLayer.Utilities.Results;
 
 
 namespace BusinessLayer.Repository
@@ -23,10 +24,14 @@ namespace BusinessLayer.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<IDataResult<User>> GetUser(int id) 
         {
-            throw new Exception("Deneme hatası");
-            return await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
+            if(id < 0)
+            {
+                return new ErrorDataResult<User>("Id sıfırdan küçük olamaz.");
+            }
+            var result = await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
+            return new SuccessDataResult<User>(result, "Kullanıcı başarıyla bulundu.");
         }
 
         public async Task AddUser(User user)
