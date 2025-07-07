@@ -24,17 +24,17 @@ namespace BusinessLayer.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<IDataResult<User>> GetUser(int id) 
+        public async Task<IDataResult<AppUser>> GetUser(string id) 
         {
-            if(id < 0)
+            if(int.Parse(id) < 0)
             {
-                return new ErrorDataResult<User>("Id sıfırdan küçük olamaz.");
+                return new ErrorDataResult<AppUser>("Id sıfırdan küçük olamaz.");
             }
-            var result = await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
-            return new SuccessDataResult<User>(result, "Kullanıcı başarıyla bulundu.");
+                var result = await _dbContext.users.FirstOrDefaultAsync(x => x.Id == id);
+            return new SuccessDataResult<AppUser>(result, "Kullanıcı başarıyla bulundu.");
         }
 
-        public async Task AddUser(User user)
+        public async Task AddUser(AppUser user)
         {
 
             await _dbContext.users.AddAsync(user);

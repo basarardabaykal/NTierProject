@@ -19,7 +19,7 @@ namespace BusinessLayer.Services.DbServices
             _mapper = mapper;
         }
 
-        public async Task<UserDTO> GetUser(int id)
+        public async Task<UserDTO> GetUser(string id)
         {
             var item = await _repo.GetUser(id);
             if (item == null)
@@ -27,7 +27,7 @@ namespace BusinessLayer.Services.DbServices
                 Console.WriteLine("Bu ID'ye sahip bir kullanıcı bulunamadı.");
                 return new UserDTO() { };
             }
-            var dto = _mapper.Map<UserDTO>(item);
+            var dto = _mapper.Map<UserDTO>(item.Data);
             return dto;
 
         }
@@ -35,7 +35,7 @@ namespace BusinessLayer.Services.DbServices
 
         public async Task AddUser(UserDTO dto)
         {
-            User Item = _mapper.Map<User>(dto);
+            AppUser Item = _mapper.Map<AppUser>(dto);
             await _repo.AddUser(Item);
         }
 

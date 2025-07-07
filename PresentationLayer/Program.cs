@@ -7,14 +7,17 @@ using BusinessLayer.Repository;
 using BusinessLayer.Services.ControllerServices;
 using BusinessLayer.Services.DbServices;
 using BusinessLayer.Validations;
+using CoreLayer.Entity;
 using DataLayer;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NTierProject.Controllers;
 using NTierProject.Middlewares;
-using System.Reflection;
 using Serilog;
+using System;
+using System.Reflection;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -42,6 +45,17 @@ builder.Services.AddValidatorsFromAssembly(typeof(UserValidator).Assembly);
 
 //automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//identity
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<UserDBContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
 
 
 //builder.Services.AddOpenApi();

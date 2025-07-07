@@ -10,7 +10,7 @@ namespace BusinessLayer.Congrate.Services.DbServices
 {
     public interface IUserDbService
     {
-        public Task<UserDTO> GetUser(int id);
+        public Task<UserDTO> GetUser(string id);
 
         public Task AddUser(UserDTO userDTO);
     }
