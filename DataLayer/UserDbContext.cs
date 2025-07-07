@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using CoreLayer.Entity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 namespace DataLayer
 {
-    public class UserDBContext : IdentityDbContext<AppUser>
+    public class UserDBContext : DbContext
     {
-        public DbSet<AppUser> users { get; set; }
+        public DbSet<User> users { get; set; }
 
         public UserDBContext()
         {

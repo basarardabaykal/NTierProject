@@ -8,8 +8,6 @@ namespace BusinessLayer.Dto;
 
 public class UserDTO
 {
-    public string Id { get; set; }
-    public string Name { get; set; }
-    public string Tcnumber { get; set; }
-    public string Email { get; set; }
+    public string name { get; set; }
+    public string tcnumber { get; set; }
 }

@@ -13,7 +13,6 @@ namespace BusinessLayer.Congrate.Services.DbServices
     {
         Task<IDataResult<UserDTO>> GetUser(int id);
 
-
         public Task AddUser(UserDTO userDTO);
     }
 }
