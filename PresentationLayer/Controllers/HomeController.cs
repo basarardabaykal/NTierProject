@@ -25,7 +25,10 @@ namespace NTierProject.Controllers
         public async Task<IActionResult> GetUser(int id)
         {
             var userDto = await _controllerService.GetUser(id);
-            return Ok(userDto);
+            return new ObjectResult(userDto)
+            {
+                StatusCode = userDto.StatusCode
+            };
         }
 
 

@@ -24,7 +24,7 @@ namespace BusinessLayer.Services.DbServices
         public async Task<IDataResult<UserDTO>> GetUser(int id)
         {
             var item = await _repo.GetUser(id);
-            if (item.Success != true) return new ErrorDataResult<UserDTO>(item.Message);
+            if (item.Success != true) return new ErrorDataResult<UserDTO>(item.StatusCode, item.Message);
           
             var dto = _mapper.Map<UserDTO>(item.Data);
             return new SuccessDataResult<UserDTO>(dto, item.Message);

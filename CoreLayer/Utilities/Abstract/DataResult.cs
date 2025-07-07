@@ -12,16 +12,35 @@ namespace CoreLayer.Utilities.Abstract
         public T Data { get; }
         public bool Success { get; }
         public string Message { get; }
+        public int StatusCode { get; }
+        public DataResult(T data, bool success, int statusCode, string message)
+        {
+            Data = data;
+            Success = success;
+            Message = message;
+            StatusCode = statusCode;
+        }
+        public DataResult(T data, bool success, int statusCode)
+        {
+            Data = data;
+            Success = success;
+            StatusCode = statusCode;
+        }
+
         public DataResult(T data, bool success, string message)
         {
             Data = data;
             Success = success;
             Message = message;
+            StatusCode = 200;
         }
+
         public DataResult(T data, bool success)
         {
             Data = data;
             Success = success;
+            StatusCode = 200;
         }
+
     }
 }

@@ -9,26 +9,26 @@ namespace CoreLayer.Utilities.Results
 {
     public class ErrorDataResult<T> : DataResult<T>
     {
-        public ErrorDataResult(T data, bool success, string message) : base(data, false, message)
+        public ErrorDataResult(T data, bool success, int statusCode, string message) : base(data, false, statusCode, message)
         {
 
         }
-        public ErrorDataResult(T data, string message) : base(data, false, message)
-        {
-
-        }
-
-        public ErrorDataResult(T data) : base(data, false)
+        public ErrorDataResult(T data, int statusCode, string message) : base(data, false, statusCode, message)
         {
 
         }
 
-        public ErrorDataResult(string message) : base(default, false, message)
+        public ErrorDataResult(T data, int statusCode) : base(data, false, statusCode)
         {
 
         }
 
-        public ErrorDataResult() : base(default, false)
+        public ErrorDataResult(int statusCode, string message) : base(default, false, statusCode, message)
+        {
+
+        }
+
+        public ErrorDataResult(int statusCode) : base(default, false, statusCode)
         {
 
         }
