@@ -11,7 +11,7 @@ namespace CoreLayer.Utilities.Interfaces
         public bool Success { get; }
         public string Message { get; }
         public T Data {  get; }
-
+        public int StatusCode { get; }
 
     }
 }

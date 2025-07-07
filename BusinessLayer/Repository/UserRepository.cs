@@ -28,10 +28,12 @@ namespace BusinessLayer.Repository
         {
             if(int.Parse(id) < 0)
             {
-                return new ErrorDataResult<AppUser>("Id sıfırdan küçük olamaz.");
+                return new ErrorDataResult<User>(400, "Id sıfırdan küçük olamaz.");
             }
-                var result = await _dbContext.users.FirstOrDefaultAsync(x => x.Id == id);
-            return new SuccessDataResult<AppUser>(result, "Kullanıcı başarıyla bulundu.");
+            var result = await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
+            if (result.id == 15) throw new Exception("dasdsadsadsa"); //global exception denemesi
+            return new SuccessDataResult<User>(result, "Kullanıcı başarıyla bulundu.");
+
         }
 
         public async Task AddUser(AppUser user)
