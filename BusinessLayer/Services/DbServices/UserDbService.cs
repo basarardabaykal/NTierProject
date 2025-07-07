@@ -4,6 +4,8 @@ using BusinessLayer.Dto;
 using CoreLayer.Entity;
 using BusinessLayer.Congrate.Services.DbServices;
 using AutoMapper;
+using CoreLayer.Utilities.Interfaces;
+using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Services.DbServices
 {
@@ -19,16 +21,13 @@ namespace BusinessLayer.Services.DbServices
             _mapper = mapper;
         }
 
-        public async Task<UserDTO> GetUser(int id)
+        public async Task<IDataResult<UserDTO>> GetUser(int id)
         {
             var item = await _repo.GetUser(id);
-            if (item == null)
-            {
-                Console.WriteLine("Bu ID'ye sahip bir kullanıcı bulunamadı.");
-                return new UserDTO() { };
-            }
-            var dto = _mapper.Map<UserDTO>(item);
-            return dto;
+            if (item.Success != true) return new ErrorDataResult<UserDTO>(item.Message);
+          
+            var dto = _mapper.Map<UserDTO>(item.Data);
+            return new SuccessDataResult<UserDTO>(dto, item.Message);
 
         }
 

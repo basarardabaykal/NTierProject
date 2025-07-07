@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Dto;
+using CoreLayer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
 {
     public interface IControllerService
     {
-        public Task<UserDTO> GetUser(int id);
+        Task<IDataResult<UserDTO>> GetUser(int id);
         public Task AddUser(UserDTO dto); 
 
     }

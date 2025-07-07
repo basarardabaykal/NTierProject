@@ -31,6 +31,7 @@ namespace BusinessLayer.Repository
                 return new ErrorDataResult<User>("Id sıfırdan küçük olamaz.");
             }
             var result = await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
+            if (result.id == 15) throw new Exception("dasdsadsadsa"); //global exception denemesi
             return new SuccessDataResult<User>(result, "Kullanıcı başarıyla bulundu.");
         }
 
