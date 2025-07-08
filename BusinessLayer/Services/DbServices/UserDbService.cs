@@ -21,8 +21,8 @@ namespace BusinessLayer.Services.DbServices
             _mapper = mapper;
         }
 
-        public async Task<IDataResult<UserDTO>> GetUser(string id)
 
+        public async Task<IDataResult<UserDTO>> GetUser(string id)
         {
             var item = await _repo.GetUser(id);
             if (item.Success != true) return new ErrorDataResult<UserDTO>(item.StatusCode, item.Message);
@@ -30,12 +30,13 @@ namespace BusinessLayer.Services.DbServices
             var dto = _mapper.Map<UserDTO>(item.Data);
             return new SuccessDataResult<UserDTO>(dto, item.Message);
 
+
         }
 
 
         public async Task AddUser(UserDTO dto)
         {
-            User Item = _mapper.Map<User>(dto);
+            AppUser Item = _mapper.Map<AppUser>(dto);
             await _repo.AddUser(Item);
         }
 

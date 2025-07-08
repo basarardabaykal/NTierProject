@@ -10,7 +10,7 @@ using System.IO;
 
 namespace DataLayer
 {
-    internal class UserDBContextFactory
+    public class UserDBContextFactory : IDesignTimeDbContextFactory<UserDBContext>
     {
         public UserDBContext CreateDbContext(string[] args)
         {
