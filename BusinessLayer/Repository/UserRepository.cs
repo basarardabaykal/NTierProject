@@ -14,7 +14,7 @@ using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<AppUser>
     {
 
         private readonly UserDBContext _dbContext;
@@ -24,14 +24,14 @@ namespace BusinessLayer.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<IDataResult<AppUser>> GetUser(string id) 
+        public async Task<IDataResult<AppUser>> Get(string id) 
         {
             var result = await _dbContext.users.FirstOrDefaultAsync(x => x.Id == id);
             return new SuccessDataResult<AppUser>(result, "Kullanıcı başarıyla bulundu.");
 
         }
 
-        public async Task AddUser(AppUser user)
+        public async Task Add(AppUser user)
         {
 
             await _dbContext.users.AddAsync(user);

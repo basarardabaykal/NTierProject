@@ -11,9 +11,9 @@ namespace BusinessLayer.Congrate.Services.DbServices
 {
     public interface IDbService<T>
     {
-        Task<IDataResult<T>> Get(string id);
+        public Task<IDataResult<T>> Get(string id);
 
 
-        public Task Add(T userDTO);
+        public Task Add(T dto);
     }
 }

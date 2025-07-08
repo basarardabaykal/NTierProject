@@ -11,11 +11,11 @@ namespace BusinessLayer.Services.DbServices
 {
     public class UserDbService : IDbService<UserDTO>
     {
-        private readonly IUserRepository _repo;
+        private readonly IRepository<AppUser> _repo;
         private readonly IMapper _mapper;
    
 
-        public UserDbService(IUserRepository repo, IMapper mapper)
+        public UserDbService(IRepository<AppUser> repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -24,7 +24,7 @@ namespace BusinessLayer.Services.DbServices
 
         public async Task<IDataResult<UserDTO>> Get(string id)
         {
-            var item = await _repo.GetUser(id);
+            var item = await _repo.Get(id);
             if (item.Success != true) return new ErrorDataResult<UserDTO>(item.StatusCode, item.Message);
           
             var dto = _mapper.Map<UserDTO>(item.Data);
@@ -37,7 +37,7 @@ namespace BusinessLayer.Services.DbServices
         public async Task Add(UserDTO dto)
         {
             AppUser Item = _mapper.Map<AppUser>(dto);
-            await _repo.AddUser(Item);
+            await _repo.Add(Item);
         }
 
     }

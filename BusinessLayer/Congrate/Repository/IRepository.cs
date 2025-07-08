@@ -9,11 +9,11 @@ using CoreLayer.Utilities.Interfaces;
 
 namespace BusinessLayer.Congrate.Repository
 {
-    public interface IUserRepository
+    public interface IRepository<T>
     {
-        public Task<IDataResult<AppUser>> GetUser(string id);
+        public Task<IDataResult<T>> Get(string id);
 
-        public Task AddUser(AppUser user);
+        public Task Add(T item);
     }
     
 }

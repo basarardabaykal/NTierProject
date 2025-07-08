@@ -35,7 +35,7 @@ builder.Services.AddControllers().AddRazorRuntimeCompilation();
 //dependency injection
 builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped(typeof(IRepository<AppUser>), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IDbService<UserDTO>), typeof(UserDbService));
 builder.Services.AddScoped(typeof(IControllerService<UserDTO>), typeof(HomeControllerService));
 //fluent validation
