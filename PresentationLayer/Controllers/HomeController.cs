@@ -24,10 +24,10 @@ namespace NTierProject.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var userDto = await _controllerService.Get(id);
-            return new ObjectResult(userDto)
+            var result = await _controllerService.Get(id);
+            return new ObjectResult(result)
             {
-                StatusCode = userDto.StatusCode
+                StatusCode = result.StatusCode
             };
         }
 

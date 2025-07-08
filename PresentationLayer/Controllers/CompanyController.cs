@@ -21,10 +21,10 @@ namespace NTierProject.Controllers
 
         public async Task<IActionResult> GetCompany(string id)
         {
-            var companyDto = await _controllerService.Get(id);
-            return new ObjectResult(companyDto)
+            var result = await _controllerService.Get(id);
+            return new ObjectResult(result)
             {
-                StatusCode = companyDto.StatusCode
+                StatusCode = result.StatusCode
             };
         } 
 
