@@ -8,8 +8,8 @@ namespace CoreLayer.Entity
 {
     public class Company
     {
-        public string Id;
-        public string Name;
-        public ICollection<AppUser> Employees;
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Name  {get; set; }
+        public ICollection<AppUser> Employees  {get; set; }
     }
 }

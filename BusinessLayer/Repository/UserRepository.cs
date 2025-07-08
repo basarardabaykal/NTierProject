@@ -10,6 +10,7 @@ using BusinessLayer.Congrate.Repository;
 using CoreLayer.Entity;
 using CoreLayer.Utilities.Interfaces;
 using CoreLayer.Utilities.Results;
+using DataLayer;
 
 
 namespace BusinessLayer.Repository
@@ -17,9 +18,9 @@ namespace BusinessLayer.Repository
     public class UserRepository : IRepository<AppUser>
     {
 
-        private readonly UserDBContext _dbContext;
+        private readonly DataLayer.DbContext _dbContext;
 
-        public UserRepository(UserDBContext dbContext)
+        public UserRepository(DataLayer.DbContext dbContext)
         {
             _dbContext = dbContext;
         }

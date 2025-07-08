@@ -31,15 +31,10 @@ namespace DataLayer
             base.OnModelCreating(builder);
 
             builder.Entity<Company>()
-                .WithOne(b => b.Company)
-                .HasForeignKey(b => b.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Company>()
-                .HasMany(c => c.Employees)
-                .WithOne(e => e.Company)
-                .HasForeignKey(e => e.CompanyId)
-                .OnDelete(DeleteBehavior.SetNull);
+            .HasMany(c => c.Employees)
+            .WithOne(e => e.Company)
+            .HasForeignKey(e => e.CompanyId)
+            .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
