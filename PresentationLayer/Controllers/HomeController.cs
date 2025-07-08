@@ -15,16 +15,16 @@ namespace NTierProject.Controllers
     public class HomeController : Controller
     {
 
-        private readonly IControllerService _controllerService;
-        public HomeController(IControllerService controllerService)
+        private readonly IControllerService<UserDTO> _controllerService;
+        public HomeController(IControllerService<UserDTO> controllerService)
         {
             _controllerService = controllerService;
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(string id)
+        public async Task<IActionResult> Get(string id)
         {
-            var userDto = await _controllerService.GetUser(id);
+            var userDto = await _controllerService.Get(id);
             return new ObjectResult(userDto)
             {
                 StatusCode = userDto.StatusCode
@@ -33,11 +33,11 @@ namespace NTierProject.Controllers
 
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddUser([FromBody] UserDTO userDTO)
+        public async Task<IActionResult> Add([FromBody] UserDTO userDTO)
         {
             if (ModelState.IsValid)
             {
-                await _controllerService.AddUser(userDTO);
+                await _controllerService.Add(userDTO);
                 return Ok("Kayıt başarıyla tamamlandı.");
             }
             else

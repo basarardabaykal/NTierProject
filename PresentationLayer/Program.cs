@@ -1,4 +1,5 @@
 using AutoMapper;
+using BusinessLayer.Dto;
 using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Congrate.Services.ControllerServices;
 using BusinessLayer.Congrate.Services.DbServices;
@@ -35,9 +36,8 @@ builder.Services.AddControllers().AddRazorRuntimeCompilation();
 builder.Services.AddDbContext<UserDBContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserDbService, UserDbService>();
-builder.Services.AddScoped<IControllerService, HomeControllerService>();
-
+builder.Services.AddScoped(typeof(IDbService<UserDTO>), typeof(UserDbService));
+builder.Services.AddScoped(typeof(IControllerService<UserDTO>), typeof(HomeControllerService));
 //fluent validation
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();

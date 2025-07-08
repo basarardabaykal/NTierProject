@@ -14,28 +14,28 @@ using CoreLayer.Utilities.Interfaces;
 
 namespace BusinessLayer.Services.ControllerServices
 {
-    public class HomeControllerService : IControllerService
+    public class HomeControllerService : IControllerService<UserDTO>
     {
-        private readonly IUserDbService _userDbService;
+        private readonly IDbService<UserDTO> _dbService;
 
-        public HomeControllerService(IUserDbService userDbService)
+        public HomeControllerService(IDbService<UserDTO> userDbService)
         {
-            _userDbService = userDbService;
+            _dbService = userDbService;
         }
 
 
-        public async Task<IDataResult<UserDTO>> GetUser(string id)
+        public async Task<IDataResult<UserDTO>> Get(string id)
 
         {
-            return await _userDbService.GetUser(id);
+            return await _dbService.Get(id);
             
 
         }
 
 
-        public async Task AddUser(UserDTO dto)
+        public async Task Add(UserDTO dto)
         {
-            await _userDbService.AddUser(dto);
+            await _dbService.Add(dto);
         }
 
       

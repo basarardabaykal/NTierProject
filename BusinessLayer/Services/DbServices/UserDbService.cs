@@ -9,7 +9,7 @@ using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Services.DbServices
 {
-    public class UserDbService : IUserDbService
+    public class UserDbService : IDbService<UserDTO>
     {
         private readonly IUserRepository _repo;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace BusinessLayer.Services.DbServices
         }
 
 
-        public async Task<IDataResult<UserDTO>> GetUser(string id)
+        public async Task<IDataResult<UserDTO>> Get(string id)
         {
             var item = await _repo.GetUser(id);
             if (item.Success != true) return new ErrorDataResult<UserDTO>(item.StatusCode, item.Message);
@@ -34,7 +34,7 @@ namespace BusinessLayer.Services.DbServices
         }
 
 
-        public async Task AddUser(UserDTO dto)
+        public async Task Add(UserDTO dto)
         {
             AppUser Item = _mapper.Map<AppUser>(dto);
             await _repo.AddUser(Item);

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.ControllerServices
 {
-    public interface IControllerService
+    public interface IControllerService<T>
     {
       
-        Task<IDataResult<UserDTO>> GetUser(string id);
+        Task<IDataResult<T>> Get(string id);
 
-        public Task AddUser(UserDTO dto); 
+        public Task Add(T dto); 
 
     }
 }
