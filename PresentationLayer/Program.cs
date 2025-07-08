@@ -38,6 +38,10 @@ builder.Services.AddDbContext<DataLayer.DbContext>(options =>
 builder.Services.AddScoped(typeof(IRepository<AppUser>), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IDbService<UserDTO>), typeof(UserDbService));
 builder.Services.AddScoped(typeof(IControllerService<UserDTO>), typeof(HomeControllerService));
+builder.Services.AddScoped(typeof(IRepository<Company>), typeof(CompanyRepository));
+builder.Services.AddScoped(typeof(IDbService<Company>), typeof(CompanyDbService));
+builder.Services.AddScoped(typeof(IControllerService<Company>), typeof(CompanyControllerService));
+
 //fluent validation
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
