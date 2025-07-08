@@ -18,7 +18,6 @@ namespace BusinessLayer.Profiles
 
                 .ReverseMap();
 
-           //this parsing works with any number of names and a single word surname.
         }
 
     }

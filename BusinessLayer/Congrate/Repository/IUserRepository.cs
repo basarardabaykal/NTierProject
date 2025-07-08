@@ -11,9 +11,9 @@ namespace BusinessLayer.Congrate.Repository
 {
     public interface IUserRepository
     {
-        public Task<IDataResult<AppUser>> GetUser(string id);
+        public Task<IDataResult<User>> GetUser(int id);
 
-        public Task AddUser(AppUser user);
+        public Task AddUser(User user);
     }
     
 }
