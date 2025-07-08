@@ -26,13 +26,9 @@ namespace BusinessLayer.Repository
 
         public async Task<IDataResult<User>> GetUser(int id) 
         {
-            if(id < 0)
-            {
-                return new ErrorDataResult<User>(400, "Id sıfırdan küçük olamaz.");
-            }
-            var result = await _dbContext.users.FirstOrDefaultAsync(x => x.id == id);
-            if (result.id == 15) throw new Exception("dasdsadsadsa"); //global exception denemesi
-            return new SuccessDataResult<User>(result, "Kullanıcı başarıyla bulundu.");
+            var result = await _dbContext.users.FirstOrDefaultAsync(x => x.Id == id);
+            return new SuccessDataResult<AppUser>(result, "Kullanıcı başarıyla bulundu.");
+
         }
 
         public async Task AddUser(User user)
