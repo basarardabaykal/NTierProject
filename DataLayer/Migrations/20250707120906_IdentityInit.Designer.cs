@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DataLayer.Migrations
 {
-    [DbContext(typeof(UserDBContext))]
+    [DbContext(typeof(DbContext))]
     [Migration("20250707120906_IdentityInit")]
     partial class IdentityInit
     {

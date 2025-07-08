@@ -33,7 +33,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddRazorRuntimeCompilation();
 
 //dependency injection
-builder.Services.AddDbContext<UserDBContext>(options =>
+builder.Services.AddDbContext<DataLayer.DbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped(typeof(IRepository<AppUser>), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IDbService<UserDTO>), typeof(UserDbService));
@@ -48,7 +48,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //identity
 builder.Services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<UserDBContext>()
+    .AddEntityFrameworkStores<DbContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.ConfigureApplicationCookie(options =>

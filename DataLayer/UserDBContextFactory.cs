@@ -10,9 +10,9 @@ using System.IO;
 
 namespace DataLayer
 {
-    public class UserDBContextFactory : IDesignTimeDbContextFactory<UserDBContext>
+    public class UserDBContextFactory : IDesignTimeDbContextFactory<DbContext>
     {
-        public UserDBContext CreateDbContext(string[] args)
+        public DbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "..", "PresentationLayer"))
@@ -21,10 +21,10 @@ namespace DataLayer
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            var optionsBuilder = new DbContextOptionsBuilder<UserDBContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
             optionsBuilder.UseNpgsql(connectionString);
 
-            return new UserDBContext(optionsBuilder.Options);
+            return new DbContext(optionsBuilder.Options);
         }
     }
 }
