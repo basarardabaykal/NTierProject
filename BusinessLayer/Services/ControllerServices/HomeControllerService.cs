@@ -11,33 +11,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using CoreLayer.Utilities.Interfaces;
+using BusinessLayer.Services.DbServices;
 
 namespace BusinessLayer.Services.ControllerServices
 {
-    public class HomeControllerService : IControllerService<UserDTO>
+    public class HomeControllerService : ControllerService<UserDTO>
     {
-        private readonly IUserDbService _dbService;
-
-        public HomeControllerService(IUserDbService userDbService)
-        {
-            _dbService = userDbService;
-        }
-
-
-        public async Task<IDataResult<UserDTO>> Get(string id)
-
-        {
-            return await _dbService.Get(id);
-            
-
-        }
-
-
-        public async Task Add(UserDTO dto)
-        {
-            await _dbService.Add(dto);
-        }
-
-      
+        public HomeControllerService(IDbService<UserDTO> dbService) : base (dbService) { }
     }
 }

@@ -16,6 +16,7 @@ namespace NTierProject.Controllers
     {
 
         private readonly IControllerService<UserDTO> _controllerService;
+        //or IHomeControllerService
         public HomeController(IControllerService<UserDTO> controllerService)
         {
             _controllerService = controllerService;
