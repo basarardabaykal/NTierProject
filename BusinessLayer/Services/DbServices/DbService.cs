@@ -24,7 +24,7 @@ namespace BusinessLayer.Services.DbServices
             _mapper = mapper;
         }
 
-        public async Task<IDataResult<TDto>> Get(string id)
+        public async Task<IDataResult<TDto>> Get(Guid id)
         {
             var item = await _repo.Get(id);
             if (item.Success != true) return new ErrorDataResult<TDto>(item.StatusCode, item.Message);

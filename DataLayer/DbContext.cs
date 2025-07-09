@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DataLayer
 {
-    public class DbContext : IdentityDbContext<AppUser>
+    public class DbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
 
         public DbContext()

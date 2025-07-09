@@ -51,7 +51,7 @@ builder.Services.AddValidatorsFromAssembly(typeof(UserValidator).Assembly);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //identity
-builder.Services.AddIdentity<AppUser, IdentityRole>()
+builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<DataLayer.DbContext>()
     .AddDefaultTokenProviders();
 

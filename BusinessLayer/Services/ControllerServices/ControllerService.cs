@@ -17,7 +17,7 @@ namespace BusinessLayer.Services.ControllerServices
             _dbService = dbService;
         }
 
-        public async Task<IDataResult<T>> Get(string id)
+        public async Task<IDataResult<T>> Get(Guid id)
         {
             return await _dbService.Get(id);
         }

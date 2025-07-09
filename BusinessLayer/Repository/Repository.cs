@@ -22,9 +22,9 @@ namespace BusinessLayer.Repository
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public async Task<IDataResult<TEntity>> Get(string id)
+        public async Task<IDataResult<TEntity>> Get(Guid id)
         {
-            var result = await _dbSet.FirstOrDefaultAsync(x => x.Id == Guid.Parse(id));
+            var result = await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
             return new SuccessDataResult<TEntity>(result, "Kullanıcı başarıyla bulundu.");
 
         }

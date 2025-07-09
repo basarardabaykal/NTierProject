@@ -19,7 +19,7 @@ namespace NTierProject.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetCompany(string id)
+        public async Task<IActionResult> GetCompany(Guid id)
         {
             var result = await _controllerService.Get(id);
             return new ObjectResult(result)

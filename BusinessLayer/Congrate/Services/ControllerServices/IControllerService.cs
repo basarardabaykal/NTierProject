@@ -11,7 +11,7 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
     public interface IControllerService<T>
     {
       
-        Task<IDataResult<T>> Get(string id);
+        Task<IDataResult<T>> Get(Guid id);
 
         public Task Add(T dto); 
 
