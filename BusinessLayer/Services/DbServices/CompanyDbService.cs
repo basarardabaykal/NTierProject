@@ -16,7 +16,7 @@ namespace BusinessLayer.Services.DbServices
 {
     public class CompanyDbService : DbService<CompanyDTO, Company>, ICompanyDbService
     {
-        public CompanyDbService(IRepository<Company> repo, IMapper mapper)
+        public CompanyDbService(IGenericRepository<Company> repo, IMapper mapper)
         : base(repo, mapper)
         {
         }

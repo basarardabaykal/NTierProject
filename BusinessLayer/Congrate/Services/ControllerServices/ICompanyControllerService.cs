@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.ControllerServices
 {
-    public interface ICompanyControllerService : IControllerService<CompanyDTO>
+    public interface ICompanyControllerService : IGenericControllerService<CompanyDTO>
     {
     }
 }

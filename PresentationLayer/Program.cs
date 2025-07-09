@@ -35,12 +35,12 @@ builder.Services.AddControllers().AddRazorRuntimeCompilation();
 //dependency injection
 builder.Services.AddDbContext<DataLayer.DbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped(typeof(IRepository<AppUser>), typeof(UserRepository));
-builder.Services.AddScoped(typeof(IDbService<UserDTO>), typeof(UserDbService));
-builder.Services.AddScoped(typeof(IControllerService<UserDTO>), typeof(UserControllerService));
-builder.Services.AddScoped(typeof(IRepository<Company>), typeof(CompanyRepository));
-builder.Services.AddScoped(typeof(IDbService<CompanyDTO>), typeof(CompanyDbService));
-builder.Services.AddScoped(typeof(IControllerService<CompanyDTO>), typeof(CompanyControllerService));
+builder.Services.AddScoped(typeof(IGenericRepository<AppUser>), typeof(UserRepository));
+builder.Services.AddScoped(typeof(IGenericDbService<UserDTO>), typeof(UserDbService));
+builder.Services.AddScoped(typeof(IGenericControllerService<UserDTO>), typeof(UserControllerService));
+builder.Services.AddScoped(typeof(IGenericRepository<Company>), typeof(CompanyRepository));
+builder.Services.AddScoped(typeof(IGenericDbService<CompanyDTO>), typeof(CompanyDbService));
+builder.Services.AddScoped(typeof(IGenericControllerService<CompanyDTO>), typeof(CompanyControllerService));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserDbService, UserDbService>();
 builder.Services.AddScoped<IUserControllerService, UserControllerService>();

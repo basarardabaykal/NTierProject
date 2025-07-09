@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.DbServices
 {
-    public interface IUserDbService : IDbService<UserDTO>
+    public interface IUserDbService : IGenericDbService<UserDTO>
     {
         public Task<IDataResult<List<AppUser>>> GetAll();
     }

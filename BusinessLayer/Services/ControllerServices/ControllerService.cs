@@ -9,10 +9,10 @@ using BusinessLayer.Congrate.Services.DbServices;
 
 namespace BusinessLayer.Services.ControllerServices
 {
-    public class ControllerService<T> : IControllerService<T>
+    public class ControllerService<T> : IGenericControllerService<T>
     {
-        protected readonly IDbService<T> _dbService;
-        public ControllerService(IDbService<T> dbService) 
+        protected readonly IGenericDbService<T> _dbService;
+        public ControllerService(IGenericDbService<T> dbService) 
         {
             _dbService = dbService;
         }

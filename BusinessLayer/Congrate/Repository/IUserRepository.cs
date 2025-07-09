@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Repository
 {
-    public interface IUserRepository : IRepository<AppUser>
+    public interface IUserRepository : IGenericRepository<AppUser>
     {
         public Task<IDataResult<List<AppUser>>> GetAll();
     }

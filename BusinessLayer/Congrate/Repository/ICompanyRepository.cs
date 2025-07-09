@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Repository
 {
-    public interface ICompanyRepository : IRepository<Company>
+    public interface ICompanyRepository : IGenericRepository<Company>
     {
     }
 }

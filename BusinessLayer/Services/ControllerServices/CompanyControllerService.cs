@@ -15,7 +15,7 @@ namespace BusinessLayer.Services.ControllerServices
 {
     public class CompanyControllerService : ControllerService<CompanyDTO>, ICompanyControllerService
     {
-        public CompanyControllerService(IDbService<CompanyDTO> dbService) : base(dbService) { } 
+        public CompanyControllerService(IGenericDbService<CompanyDTO> dbService) : base(dbService) { } 
 
     }
 }

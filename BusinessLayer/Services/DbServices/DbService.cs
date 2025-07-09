@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services.DbServices
 {
-    public class DbService<TDto, TEntity> : IDbService<TDto>
+    public class DbService<TDto, TEntity> : IGenericDbService<TDto>
     {
-        private readonly IRepository<TEntity> _repo;
+        private readonly IGenericRepository<TEntity> _repo;
         private readonly IMapper _mapper;
 
-        public DbService(IRepository<TEntity> repo, IMapper mapper)
+        public DbService(IGenericRepository<TEntity> repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;

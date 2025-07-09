@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.DbServices
 {
-    public interface IDbService<TDto>
+    public interface IGenericDbService<TDto>
     {
         public Task<IDataResult<TDto>> Get(Guid id);
 

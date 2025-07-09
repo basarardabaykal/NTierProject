@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.DbServices
 {
-    public interface ICompanyDbService : IDbService<CompanyDTO>
+    public interface ICompanyDbService : IGenericDbService<CompanyDTO>
     {
     }
 }

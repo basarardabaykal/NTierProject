@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.ControllerServices
 {
-    public interface IControllerService<T>
+    public interface IGenericControllerService<T>
     {
       
         Task<IDataResult<T>> Get(Guid id);

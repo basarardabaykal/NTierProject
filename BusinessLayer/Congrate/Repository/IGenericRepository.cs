@@ -9,7 +9,7 @@ using CoreLayer.Utilities.Interfaces;
 
 namespace BusinessLayer.Congrate.Repository
 {
-    public interface IRepository<TEntity>
+    public interface IGenericRepository<TEntity>
     {
         public Task<IDataResult<TEntity>> Get(Guid id);
         

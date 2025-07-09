@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.ControllerServices
 {
-    public interface IUserControllerService : IControllerService<UserDTO>
+    public interface IUserControllerService : IGenericControllerService<UserDTO>
     {
         public Task<IDataResult<List<AppUser>>> GetAll();
     }

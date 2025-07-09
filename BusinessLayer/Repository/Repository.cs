@@ -11,7 +11,7 @@ using BusinessLayer.Congrate.Repository;
 
 namespace BusinessLayer.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity :class,  IBaseEntity
+    public class Repository<TEntity> : IGenericRepository<TEntity> where TEntity :class,  IBaseEntity
     {
         protected readonly DataLayer.DbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
