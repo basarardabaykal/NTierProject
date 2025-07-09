@@ -13,7 +13,7 @@ using AutoMapper;
 
 namespace BusinessLayer.Services.ControllerServices
 {
-    public class CompanyControllerService : ControllerService<CompanyDTO>
+    public class CompanyControllerService : ControllerService<CompanyDTO>, ICompanyControllerService
     {
         public CompanyControllerService(IDbService<CompanyDTO> dbService) : base(dbService) { } 
 

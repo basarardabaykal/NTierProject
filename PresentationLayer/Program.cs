@@ -37,7 +37,7 @@ builder.Services.AddDbContext<DataLayer.DbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped(typeof(IRepository<AppUser>), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IDbService<UserDTO>), typeof(UserDbService));
-builder.Services.AddScoped(typeof(IControllerService<UserDTO>), typeof(HomeControllerService));
+builder.Services.AddScoped(typeof(IControllerService<UserDTO>), typeof(UserControllerService));
 builder.Services.AddScoped(typeof(IRepository<Company>), typeof(CompanyRepository));
 builder.Services.AddScoped(typeof(IDbService<CompanyDTO>), typeof(CompanyDbService));
 builder.Services.AddScoped(typeof(IControllerService<CompanyDTO>), typeof(CompanyControllerService));

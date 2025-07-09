@@ -15,7 +15,7 @@ using DataLayer;
 
 namespace BusinessLayer.Repository
 {
-    public class UserRepository : Repository<AppUser>
+    public class UserRepository : Repository<AppUser>, IUserRepository
     {
         public UserRepository(DataLayer.DbContext dbContext) : base (dbContext) { }
 

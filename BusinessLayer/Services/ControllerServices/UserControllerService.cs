@@ -15,8 +15,8 @@ using BusinessLayer.Services.DbServices;
 
 namespace BusinessLayer.Services.ControllerServices
 {
-    public class HomeControllerService : ControllerService<UserDTO>
+    public class UserControllerService : ControllerService<UserDTO>, IUserControllerService
     {
-        public HomeControllerService(IDbService<UserDTO> dbService) : base (dbService) { }
+        public UserControllerService(IDbService<UserDTO> dbService) : base (dbService) { }
     }
 }

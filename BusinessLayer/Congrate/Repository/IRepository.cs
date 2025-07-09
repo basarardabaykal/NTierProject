@@ -9,11 +9,11 @@ using CoreLayer.Utilities.Interfaces;
 
 namespace BusinessLayer.Congrate.Repository
 {
-    public interface IRepository<T>
+    public interface IRepository<TEntity>
     {
-        public Task<IDataResult<T>> Get(Guid id);
+        public Task<IDataResult<TEntity>> Get(Guid id);
         
-        public Task Add(T item);
+        public Task Add(TEntity item);
     }
     
 }
