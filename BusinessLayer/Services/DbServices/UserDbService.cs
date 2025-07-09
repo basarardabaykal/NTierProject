@@ -9,9 +9,14 @@ using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Services.DbServices
 {
-    public class UserDbService : DbService<UserDTO, AppUser>
+    public class UserDbService : DbService<UserDTO, AppUser>, IUserDbService
     {
    
         public UserDbService(IRepository<AppUser> repo, IMapper mapper) : base(repo, mapper) { }
+
+        public void FunctionOnlyUserDbServiceHas() 
+        {
+            Console.WriteLine("blablablablablablablablablablablablablablablabla");
+        }
     }
 }
