@@ -16,9 +16,9 @@ namespace BusinessLayer.Services.ControllerServices
 {
     public class HomeControllerService : IControllerService<UserDTO>
     {
-        private readonly IDbService<UserDTO> _dbService;
+        private readonly IUserDbService _dbService;
 
-        public HomeControllerService(IDbService<UserDTO> userDbService)
+        public HomeControllerService(IUserDbService userDbService)
         {
             _dbService = userDbService;
         }
