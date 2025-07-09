@@ -14,28 +14,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services.DbServices
 {
-    public class CompanyDbService : IDbService<CompanyDTO>
+    public class CompanyDbService : DbService<CompanyDTO, Company>
     {
-        private readonly IRepository<Company> _repo;
-        private readonly IMapper _mapper;
-
         public CompanyDbService(IRepository<Company> repo, IMapper mapper)
+        : base(repo, mapper)
         {
-            _repo = repo;
-            _mapper = mapper;
-        }
-        public async Task<IDataResult<CompanyDTO>> Get(string id)
-        {
-            var item = await _repo.Get(id);
-            if (item.Success != true) return new ErrorDataResult<CompanyDTO>(item.StatusCode, item.Message);
-
-            var dto = _mapper.Map<CompanyDTO>(item.Data);
-            return new SuccessDataResult<CompanyDTO>(dto, item.Message);
-        }
-        public async Task Add(CompanyDTO dto)
-        {
-            Company Item = _mapper.Map<Company>(dto);
-            await _repo.Add(Item);
         }
     }
 }

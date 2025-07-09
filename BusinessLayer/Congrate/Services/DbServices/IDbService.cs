@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.DbServices
 {
-    public interface IDbService<T>
+    public interface IDbService<TDto>
     {
-        public Task<IDataResult<T>> Get(string id);
+        public Task<IDataResult<TDto>> Get(string id);
 
 
-        public Task Add(T dto);
+        public Task Add(TDto dto);
     }
 }
