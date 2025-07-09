@@ -1,0 +1,39 @@
+﻿using CoreLayer.Entity;
+using CoreLayer.Utilities.Interfaces;
+using CoreLayer.Utilities.Results;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BusinessLayer.Congrate.Repository;
+
+namespace BusinessLayer.Repository
+{
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity :class,  IBaseEntity
+    {
+        private readonly DataLayer.DbContext _dbContext;
+        private readonly DbSet<TEntity> _dbSet;
+
+        public Repository(DataLayer.DbContext dbContext)
+        {
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<TEntity>();
+        }
+
+        public async Task<IDataResult<TEntity>> Get(string id)
+        {
+            var result = await _dbSet.FirstOrDefaultAsync(x => x.Id == Guid.Parse(id));
+            return new SuccessDataResult<TEntity>(result, "Kullanıcı başarıyla bulundu.");
+
+        }
+
+        public async Task Add(TEntity item)
+        {
+
+            await _dbSet.AddAsync(item);
+            await _dbContext.SaveChangesAsync();
+        }
+    }
+}

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreLayer.Entity
 {
-    public class Company
+    public class Company : IBaseEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name  {get; set; }

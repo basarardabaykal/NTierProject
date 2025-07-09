@@ -12,7 +12,7 @@ namespace BusinessLayer.Congrate.Repository
     public interface IRepository<T>
     {
         public Task<IDataResult<T>> Get(string id);
-
+        
         public Task Add(T item);
     }
     

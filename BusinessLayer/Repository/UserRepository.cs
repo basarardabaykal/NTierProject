@@ -15,29 +15,10 @@ using DataLayer;
 
 namespace BusinessLayer.Repository
 {
-    public class UserRepository : IRepository<AppUser>
+    public class UserRepository : Repository<AppUser>
     {
+        public UserRepository(DataLayer.DbContext dbContext) : base (dbContext) { }
 
-        private readonly DataLayer.DbContext _dbContext;
-
-        public UserRepository(DataLayer.DbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public async Task<IDataResult<AppUser>> Get(string id) 
-        {
-            var result = await _dbContext.users.FirstOrDefaultAsync(x => x.Id == id);
-            return new SuccessDataResult<AppUser>(result, "Kullanıcı başarıyla bulundu.");
-
-        }
-
-        public async Task Add(AppUser user)
-        {
-
-            await _dbContext.users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
-        }
     }
 }
 
