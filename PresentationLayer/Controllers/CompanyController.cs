@@ -12,8 +12,8 @@ namespace NTierProject.Controllers
     [Route("api/[controller]")]
     public class CompanyController : Controller
     {
-        private readonly IControllerService<CompanyDTO> _controllerService;
-        public CompanyController(IControllerService<CompanyDTO> controllerService)
+        private readonly ICompanyControllerService _controllerService;
+        public CompanyController(ICompanyControllerService controllerService)
         {
             _controllerService = controllerService;
         }

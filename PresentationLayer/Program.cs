@@ -41,6 +41,10 @@ builder.Services.AddScoped(typeof(IControllerService<UserDTO>), typeof(UserContr
 builder.Services.AddScoped(typeof(IRepository<Company>), typeof(CompanyRepository));
 builder.Services.AddScoped(typeof(IDbService<CompanyDTO>), typeof(CompanyDbService));
 builder.Services.AddScoped(typeof(IControllerService<CompanyDTO>), typeof(CompanyControllerService));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserDbService, UserDbService>();
+builder.Services.AddScoped<IUserControllerService, UserControllerService>();
+
 
 //fluent validation
 builder.Services.AddFluentValidationAutoValidation();

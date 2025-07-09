@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Dto;
+using CoreLayer.Entity;
+using CoreLayer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,6 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
 {
     public interface IUserControllerService : IControllerService<UserDTO>
     {
+        public Task<IDataResult<List<AppUser>>> GetAll();
     }
 }

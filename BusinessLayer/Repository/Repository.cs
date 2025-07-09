@@ -13,8 +13,8 @@ namespace BusinessLayer.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity :class,  IBaseEntity
     {
-        private readonly DataLayer.DbContext _dbContext;
-        private readonly DbSet<TEntity> _dbSet;
+        protected readonly DataLayer.DbContext _dbContext;
+        protected readonly DbSet<TEntity> _dbSet;
 
         public Repository(DataLayer.DbContext dbContext)
         {

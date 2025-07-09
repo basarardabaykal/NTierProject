@@ -11,12 +11,15 @@ namespace BusinessLayer.Services.DbServices
 {
     public class UserDbService : DbService<UserDTO, AppUser>, IUserDbService
     {
-   
-        public UserDbService(IRepository<AppUser> repo, IMapper mapper) : base(repo, mapper) { }
-
-        public void FunctionOnlyUserDbServiceHas() 
+        private readonly IUserRepository _userRepository;
+        public UserDbService(IUserRepository userRepository, IMapper mapper) : base(userRepository, mapper) 
         {
-            Console.WriteLine("blablablablablablablablablablablablablablablabla");
+            _userRepository = userRepository;
+        }
+
+        public async Task<IDataResult<List<AppUser>>> GetAll()
+        {
+            return await _userRepository.GetAll(); 
         }
     }
 }

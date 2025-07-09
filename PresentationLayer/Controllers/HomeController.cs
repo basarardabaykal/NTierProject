@@ -5,6 +5,7 @@ using CoreLayer;
 using BusinessLayer.Dto;
 using BusinessLayer.Congrate.Services.DbServices;
 using BusinessLayer.Congrate.Services.ControllerServices;
+using CoreLayer.Utilities.Interfaces;
 
 
 namespace NTierProject.Controllers
@@ -15,9 +16,9 @@ namespace NTierProject.Controllers
     public class HomeController : Controller
     {
 
-        private readonly IControllerService<UserDTO> _controllerService;
+        private readonly IUserControllerService _controllerService;
         //or IHomeControllerService
-        public HomeController(IControllerService<UserDTO> controllerService)
+        public HomeController(IUserControllerService controllerService)
         {
             _controllerService = controllerService;
         }
@@ -48,5 +49,14 @@ namespace NTierProject.Controllers
             
         }
 
+        [HttpGet("")]
+        public async Task<IActionResult> GetAll() //must return IDataResult
+        {
+            var result = await _controllerService.GetAll();
+            return new ObjectResult(result)
+            {
+                StatusCode = 200
+            };
+        }
     }
 }

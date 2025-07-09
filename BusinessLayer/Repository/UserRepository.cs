@@ -10,7 +10,7 @@ using BusinessLayer.Congrate.Repository;
 using CoreLayer.Entity;
 using CoreLayer.Utilities.Interfaces;
 using CoreLayer.Utilities.Results;
-using DataLayer;
+
 
 
 namespace BusinessLayer.Repository
@@ -18,6 +18,12 @@ namespace BusinessLayer.Repository
     public class UserRepository : Repository<AppUser>, IUserRepository
     {
         public UserRepository(DataLayer.DbContext dbContext) : base (dbContext) { }
+
+        public async Task<IDataResult<List<AppUser>>> GetAll()
+        {
+            var result = await _dbSet.ToListAsync();
+            return new SuccessDataResult<List<AppUser>>(result, "Tüm kullanıcılar başarıyla bulundu.");
+        }
 
     }
 }

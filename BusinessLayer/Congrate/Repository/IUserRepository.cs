@@ -1,4 +1,5 @@
 ﻿using CoreLayer.Entity;
+using CoreLayer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace BusinessLayer.Congrate.Repository
 {
     public interface IUserRepository : IRepository<AppUser>
     {
+        public Task<IDataResult<List<AppUser>>> GetAll();
     }
 }
