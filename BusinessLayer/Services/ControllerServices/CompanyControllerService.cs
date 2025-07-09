@@ -15,8 +15,8 @@ namespace BusinessLayer.Services.ControllerServices
 {
     public class CompanyControllerService : IControllerService<CompanyDTO>
     {
-        private readonly IDbService<CompanyDTO> _dbService;
-        public CompanyControllerService(IDbService<CompanyDTO> dbService) 
+        private readonly ICompanyDbService _dbService;
+        public CompanyControllerService(ICompanyDbService dbService) 
         {
             _dbService = dbService;
         }
