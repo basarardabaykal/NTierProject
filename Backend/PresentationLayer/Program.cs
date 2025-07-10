@@ -29,6 +29,17 @@ Log.Logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
+//cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 
 builder.Services.AddControllers().AddRazorRuntimeCompilation();
 
@@ -80,6 +91,9 @@ builder.Services.AddSwaggerGen();
 builder.Host.UseSerilog();
 
 var app = builder.Build();
+
+//cors
+app.UseCors("AllowAll");
 
 //global exception handler
 app.UseMiddleware<GlobalExceptionHandlerMiddleware>();

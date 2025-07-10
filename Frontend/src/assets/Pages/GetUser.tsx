@@ -1,9 +1,18 @@
 import { useState } from "react"
+import axios from "axios"
+
 export default function GetUser() {
   //const [name, setName] = useState("")
   const [id, setId] = useState("")
-  const handleSubmit = () => {
-    console.log(id)
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.get(" https://localhost:7297/api/Home/0197f3ad-5a8a-7128-9070-f008137650e2")
+      console.log(response.data)
+    } catch (error) {
+      console.log("An error occured.")
+    }
+
+
   }
   return (
     <>
