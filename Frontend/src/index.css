@@ -13,16 +13,19 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 100vh;
+  min-width: 100vw;
   min-height: 100vh;
 }
 
 body {
   margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
