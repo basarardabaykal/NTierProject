@@ -62,6 +62,9 @@ builder.Services.AddScoped<IUserControllerService, UserControllerService>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<ICompanyDbService, CompanyDbService>();
 builder.Services.AddScoped<ICompanyControllerService, CompanyControllerService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthDbService, AuthDbService>();
+builder.Services.AddScoped<IAuthControllerService, AuthControllerService>();
 
 
 //fluent validation
@@ -78,7 +81,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
     .AddDefaultTokenProviders();
 
 //authentication
-builder.Services.AddAuthentication(options =>
+/*builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -98,7 +101,7 @@ builder.Services.AddAuthentication(options =>
             )
         };
     });
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization();*/
 
 /*builder.Services.ConfigureApplicationCookie(options =>
 {
