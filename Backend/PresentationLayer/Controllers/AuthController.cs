@@ -17,10 +17,14 @@ namespace PresentationLayer.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<LoginResponseDTO>> Login([FromBody] LoginRequestDTO loginDTO)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO loginDTO)
         {
             var result = await _controllerService.Login(loginDTO);
-            return Ok(result);
+
+            return new ObjectResult(result)
+            {
+                StatusCode = result.StatusCode,
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CoreLayer.Entity;
+using CoreLayer.Utilities.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace BusinessLayer.Congrate.Repository
 {
     public interface IAuthRepository
     {
-        public Task<AppUser> GetUserByEmail(string email);
-        public Task<bool> CheckPassword(AppUser user, string password);
+        public Task<IDataResult<AppUser>> GetUserByEmail(string email);
+        public Task<IDataResult<bool>> CheckPassword(AppUser user, string password);
     }
 }

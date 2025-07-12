@@ -1,4 +1,5 @@
 ﻿using CoreLayer.Entity;
+using CoreLayer.Utilities.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace BusinessLayer.Congrate.Services.DbServices
 {
     public interface IAuthDbService
     {
-        public Task<AppUser> Login(string email, string password);
+        public Task<IDataResult<AppUser>> Login(string email, string password);
     }
 }

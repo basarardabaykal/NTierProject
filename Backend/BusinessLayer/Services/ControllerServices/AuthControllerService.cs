@@ -5,6 +5,8 @@ using BusinessLayer.Dto;
 using BusinessLayer.Dto.Auth;
 using BusinessLayer.Services.DbServices;
 using CoreLayer.Entity;
+using CoreLayer.Utilities.Interfaces;
+using CoreLayer.Utilities.Results;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -29,12 +31,17 @@ namespace BusinessLayer.Services.ControllerServices
             _configuration = configuration;
         }
 
-        public async Task<LoginResponseDTO> Login(LoginRequestDTO loginDTO) 
+        public async Task<IDataResult<LoginResponseDTO>> Login(LoginRequestDTO loginDTO) 
         { 
-            var user = await _authDbService.Login(loginDTO.email, loginDTO.password);
+            var result = await _authDbService.Login(loginDTO.email, loginDTO.password);
+            var user = result.Data;
+            if (!result.Success)
+            {
+                return new ErrorDataResult<LoginResponseDTO>(result.StatusCode, result.Message);
+            }
             var token = GenerateJwtToken(user);
 
-            return new LoginResponseDTO
+            var data =  new LoginResponseDTO
             {
                 Token = token,
                 userDTO = new UserDTO
@@ -42,6 +49,8 @@ namespace BusinessLayer.Services.ControllerServices
                     Email = user.Email
                 }
             };
+
+            return new SuccessDataResult<LoginResponseDTO>(data);
 
         }
 

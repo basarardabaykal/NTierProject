@@ -50,7 +50,7 @@ namespace NTierProject.Controllers
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAll() //must return IDataResult
+        public async Task<IActionResult> GetAll()
         {
             var result = await _controllerService.GetAll();
             return new ObjectResult(result)
