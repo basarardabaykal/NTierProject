@@ -1,10 +1,19 @@
 ﻿using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Congrate.Services.ControllerServices;
 using BusinessLayer.Congrate.Services.DbServices;
+using BusinessLayer.Dto;
+using BusinessLayer.Dto.Auth;
 using BusinessLayer.Services.DbServices;
+using CoreLayer.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,14 +22,53 @@ namespace BusinessLayer.Services.ControllerServices
     public class AuthControllerService : IAuthControllerService
     {
         private readonly IAuthDbService _authDbService;
-        public AuthControllerService(IAuthDbService authDbService)
+        private readonly IConfiguration _configuration;
+        public AuthControllerService(IAuthDbService authDbService, IConfiguration configuration)
         {
             _authDbService = authDbService;
+            _configuration = configuration;
         }
 
-        public async Task Login() 
+        public async Task<LoginResponseDTO> Login(LoginRequestDTO loginDTO) 
         { 
-            await _authDbService.Login();
+            var user = await _authDbService.Login(loginDTO.email, loginDTO.password);
+            var token = GenerateJwtToken(user);
+
+            return new LoginResponseDTO
+            {
+                Token = token,
+                userDTO = new UserDTO
+                {
+                    Email = user.Email
+                }
+            };
+
         }
+
+        private string GenerateJwtToken(AppUser user)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new List<Claim>
+        {
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new(ClaimTypes.Name, user.UserName),
+            new(ClaimTypes.Email, user.Email)
+        };
+
+            var expiresAt = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Jwt:ExpiryMinutes"]));
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: expiresAt,
+                signingCredentials: credentials
+            );
+
+            return (new JwtSecurityTokenHandler().WriteToken(token));
+        }
+
     }
 }

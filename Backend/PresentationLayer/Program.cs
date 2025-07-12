@@ -22,6 +22,7 @@ using Serilog;
 using System;
 using System.Reflection;
 using System.Text;
+using DotNetEnv;
 
 //serilog
 Log.Logger = new LoggerConfiguration()
@@ -30,8 +31,14 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .CreateLogger();
 
+//env
+DotNetEnv.Env.Load();
+
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 //cors
 builder.Services.AddCors(options =>
@@ -81,11 +88,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
     .AddDefaultTokenProviders();
 
 //authentication
-/*builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -96,12 +99,9 @@ builder.Services.AddIdentity<AppUser, IdentityRole<Guid>>()
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
-            )
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
-builder.Services.AddAuthorization();*/
 
 /*builder.Services.ConfigureApplicationCookie(options =>
 {

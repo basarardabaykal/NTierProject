@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLayer.Dto.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
 {
     public interface IAuthControllerService
     {
-        public Task Login();
+        public Task<LoginResponseDTO> Login(LoginRequestDTO loginDTO);
 
     }
 }

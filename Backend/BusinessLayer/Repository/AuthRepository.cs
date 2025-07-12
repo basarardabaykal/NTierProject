@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Congrate.Repository;
+using CoreLayer.Entity;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +11,20 @@ namespace BusinessLayer.Repository
 {
     public class AuthRepository : IAuthRepository
     {
-        private readonly DataLayer.DbContext _dbContext;
+        private readonly UserManager<AppUser> _userManager;
 
-        public AuthRepository(DataLayer.DbContext dbContext)
+        public AuthRepository(UserManager<AppUser> userManager)
         {
-            _dbContext = dbContext;
+            _userManager = userManager;
         }
-        public async Task Login()
+        public async Task<AppUser> GetUserByEmail(string email)
         {
-            //_dbContext.asfjasıgfagfa
-            Console.WriteLine("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+            return await _userManager.FindByNameAsync(email);
+        }   
+
+        public async Task<bool> CheckPassword(AppUser user, string password)
+        {
+            return await _userManager.CheckPasswordAsync(user, password);      
         }
     }
 }

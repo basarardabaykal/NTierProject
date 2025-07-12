@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Dto
+namespace BusinessLayer.Dto.Auth
 {
-    public class LoginDTO
+    public class LoginRequestDTO
     {
         public string email {  get; set; }
         public string password { get; set; }

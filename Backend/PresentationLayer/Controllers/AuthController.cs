@@ -1,6 +1,6 @@
 ﻿using BusinessLayer.Congrate.Services.ControllerServices;
 using Microsoft.AspNetCore.Mvc;
-using BusinessLayer.Dto;
+using BusinessLayer.Dto.Auth;
 
 
 namespace PresentationLayer.Controllers
@@ -17,9 +17,10 @@ namespace PresentationLayer.Controllers
         }
 
         [HttpPost("login")]
-        public async Task Login([FromBody] LoginDTO loginDTO)
+        public async Task<ActionResult<LoginResponseDTO>> Login([FromBody] LoginRequestDTO loginDTO)
         {
-            _controllerService.Login();
+            var result = await _controllerService.Login(loginDTO);
+            return Ok(result);
         }
     }
 }

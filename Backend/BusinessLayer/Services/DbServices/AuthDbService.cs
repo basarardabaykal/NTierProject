@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Congrate.Services.DbServices;
+using CoreLayer.Entity;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,22 @@ namespace BusinessLayer.Services.DbServices
         {
             _authRepository = authRepository;
         }
-        public async Task Login()
+        public async Task<AppUser> Login(string email, string password)
         {
-            _authRepository.Login();
+            Console.WriteLine("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY: " + email);
+            var user = await _authRepository.GetUserByEmail(email);
+            if (user == null)
+            {
+                Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            }
+            if (await _authRepository.CheckPassword(user, password))
+            {
+                return user;    
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
