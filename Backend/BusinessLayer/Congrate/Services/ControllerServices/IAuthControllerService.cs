@@ -11,6 +11,7 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
     public interface IAuthControllerService
     {
         public Task<IDataResult<LoginResponseDTO>> Login(LoginRequestDTO loginDTO);
+        public Task<IDataResult<RegisterResponseDTO>> Register(RegisterRequestDTO registerDTO);
 
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BusinessLayer.Repository
 {
@@ -54,14 +55,32 @@ namespace BusinessLayer.Repository
                 {
                     return new ErrorDataResult<bool>(hasMatchedPasswords, 500, "Password is not correct.");
                 }
-                
+
             }
             catch (Exception exception)
             {
                 return new ErrorDataResult<bool>(500, "An unexpected error has occured while checking the password.");
             }
-            
-            
+        }
+
+        public async Task<IDataResult<AppUser>> CreateUser(AppUser user, string password)
+        {
+            try
+            {
+                var result = await _userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    return new SuccessDataResult<AppUser>(user, "User has been created successfully.");
+                }
+                else
+                {
+                    return new ErrorDataResult<AppUser>(400, "User creation failed");
+                }
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<AppUser>(500, "An unexpected error occurred while creating the user.");
+            }
         }
     }
 }

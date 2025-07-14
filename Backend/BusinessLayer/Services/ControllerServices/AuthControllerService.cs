@@ -33,7 +33,7 @@ namespace BusinessLayer.Services.ControllerServices
 
         public async Task<IDataResult<LoginResponseDTO>> Login(LoginRequestDTO loginDTO) 
         { 
-            var result = await _authDbService.Login(loginDTO.email, loginDTO.password);
+            var result = await _authDbService.Login(loginDTO.Email, loginDTO.Password);
             var user = result.Data;
             if (!result.Success)
             {
@@ -51,7 +51,36 @@ namespace BusinessLayer.Services.ControllerServices
             };
 
             return new SuccessDataResult<LoginResponseDTO>(data);
+        }
 
+        public async Task<IDataResult<RegisterResponseDTO>> Register(RegisterRequestDTO registerDTO)
+        {
+            if (registerDTO.ConfirmPassword != registerDTO.Password)
+            {
+                return new ErrorDataResult<RegisterResponseDTO>(400, "Passwords do not match.");
+            }
+
+            string userName = registerDTO.Email;
+
+            var result = await _authDbService.Register(registerDTO.Email, registerDTO.Password, registerDTO.FirstName, registerDTO.LastName, registerDTO.TcNumber, userName);
+            var user = result.Data;
+            if (!result.Success)
+            {
+                return new ErrorDataResult<RegisterResponseDTO>(result.StatusCode, result.Message);
+            }
+
+            var token = GenerateJwtToken(user);
+
+            var data = new RegisterResponseDTO
+            {
+                userDTO = new UserDTO
+                {
+                    Email = user.Email
+                },
+                Token = token
+            };
+
+            return new SuccessDataResult<RegisterResponseDTO>(data);
         }
 
         private string GenerateJwtToken(AppUser user)

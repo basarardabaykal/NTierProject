@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Dto.Auth
 {
-    public class LoginRequestDTO
+    public class RegisterResponseDTO
     {
-        public string Email {  get; set; }
-        public string Password { get; set; }
+        public UserDTO userDTO { get; set; }
+        public string Token { get; set; }
     }
 }

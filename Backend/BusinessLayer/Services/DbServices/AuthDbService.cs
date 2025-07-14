@@ -41,5 +41,25 @@ namespace BusinessLayer.Services.DbServices
                     
             }
         }
+        public async Task<IDataResult<AppUser>> Register(string email, string password, string firstName, string lastName, string tcNumber, string userName)
+        {
+            var existingUserResult = await _authRepository.GetUserByEmail(email);
+            if (existingUserResult.Success)
+            {
+                return new ErrorDataResult<AppUser>(400, "User with this email already exists.");
+            }
+
+            var newUser = new AppUser
+            {
+                Email = email,
+                Firstname = firstName,
+                Lastname = lastName,
+                Tcnumber = tcNumber,
+                UserName = userName
+            };
+            
+            var result = await _authRepository.CreateUser(newUser, password);
+            return result;
+        }
     }
 }

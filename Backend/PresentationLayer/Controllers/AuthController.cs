@@ -26,5 +26,14 @@ namespace PresentationLayer.Controllers
                 StatusCode = result.StatusCode,
             };
         }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDTO registerDTO)
+        {
+            var result = await _controllerService.Register(registerDTO);
+            return new ObjectResult(result)
+            {
+                StatusCode = result.StatusCode,
+            };
+        }
     }
 }
