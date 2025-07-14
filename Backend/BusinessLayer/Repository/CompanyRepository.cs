@@ -13,7 +13,7 @@ using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Repository
 {
-    public class CompanyRepository : Repository<Company>, ICompanyRepository
+    public class CompanyRepository : GenericRepository<Company>, ICompanyRepository
     {
         public CompanyRepository(DataLayer.DbContext dbContext) : base(dbContext) { }
     }

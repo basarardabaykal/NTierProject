@@ -15,7 +15,7 @@ using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Repository
 {
-    public class UserRepository : Repository<AppUser>, IUserRepository
+    public class UserRepository : GenericRepository<AppUser>, IUserRepository
     {
         public UserRepository(DataLayer.DbContext dbContext) : base (dbContext) { }
 

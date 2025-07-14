@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services.DbServices
 {
-    public class CompanyDbService : DbService<CompanyDTO, Company>, ICompanyDbService
+    public class CompanyDbService : GenericDbService<CompanyDTO, Company>, ICompanyDbService
     {
         public CompanyDbService(IGenericRepository<Company> repo, IMapper mapper)
         : base(repo, mapper)

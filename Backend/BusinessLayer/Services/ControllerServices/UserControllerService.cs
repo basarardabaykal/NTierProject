@@ -15,7 +15,7 @@ using BusinessLayer.Services.DbServices;
 
 namespace BusinessLayer.Services.ControllerServices
 {
-    public class UserControllerService : ControllerService<UserDTO>, IUserControllerService
+    public class UserControllerService : GenericControllerService<UserDTO>, IUserControllerService
     {
         private readonly IUserDbService _userDbService; 
         public UserControllerService(IUserDbService dbService) : base (dbService) 

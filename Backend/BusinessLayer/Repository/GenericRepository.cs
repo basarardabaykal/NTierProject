@@ -11,12 +11,12 @@ using BusinessLayer.Congrate.Repository;
 
 namespace BusinessLayer.Repository
 {
-    public class Repository<TEntity> : IGenericRepository<TEntity> where TEntity :class,  IBaseEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity :class,  IBaseEntity
     {
         protected readonly DataLayer.DbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
 
-        public Repository(DataLayer.DbContext dbContext)
+        public GenericRepository(DataLayer.DbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();

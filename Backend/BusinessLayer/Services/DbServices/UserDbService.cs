@@ -9,7 +9,7 @@ using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Services.DbServices
 {
-    public class UserDbService : DbService<UserDTO, AppUser>, IUserDbService
+    public class UserDbService : GenericDbService<UserDTO, AppUser>, IUserDbService
     {
         private readonly IUserRepository _userRepository;
         public UserDbService(IUserRepository userRepository, IMapper mapper) : base(userRepository, mapper) 
