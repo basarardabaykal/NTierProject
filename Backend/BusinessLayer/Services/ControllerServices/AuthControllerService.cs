@@ -73,6 +73,7 @@ namespace BusinessLayer.Services.ControllerServices
 
             var data = new RegisterResponseDTO
             {
+                Message = result.Message,
                 userDTO = new UserDTO
                 {
                     Email = user.Email

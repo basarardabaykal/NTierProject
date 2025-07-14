@@ -10,5 +10,6 @@ namespace BusinessLayer.Dto.Auth
     {
         public UserDTO userDTO { get; set; }
         public string Token { get; set; }
+        public string Message { get; set; }
     }
 }
