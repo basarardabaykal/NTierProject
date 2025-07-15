@@ -17,9 +17,9 @@ namespace BusinessLayer.Repository
     public class AuthRepository : IAuthRepository
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
-        public AuthRepository(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AuthRepository(UserManager<AppUser> userManager, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -110,7 +110,7 @@ namespace BusinessLayer.Repository
             {
                 if (!await _roleManager.RoleExistsAsync(role))
                 {
-                    await _roleManager.CreateAsync(new IdentityRole(role));
+                    await _roleManager.CreateAsync(new IdentityRole<Guid>(role));
                 }
 
                 if (await _userManager.IsInRoleAsync(user, role))
