@@ -41,7 +41,7 @@ namespace BusinessLayer.Services.DbServices
                     
             }
         }
-        public async Task<IDataResult<AppUser>> Register(string email, string password, string firstName, string lastName, string tcNumber, string userName)
+        public async Task<IDataResult<AppUser>> Register(string email, string password, string firstName, string lastName, string tcNumber, string userName, string role)
         {
             var existingUserResult = await _authRepository.GetUserByEmail(email);
             if (existingUserResult.Success)
@@ -59,7 +59,16 @@ namespace BusinessLayer.Services.DbServices
             };
             
             var result = await _authRepository.CreateUser(newUser, password);
+            if (result.Success)
+            {
+                await _authRepository.AssignRole(newUser, role);
+            }
             return result;
+        }
+
+        public async Task<IDataResult<List<string>>> GetUserRoles(string email)
+        {
+            return await _authRepository.GetUserRoles(email);
         }
     }
 }

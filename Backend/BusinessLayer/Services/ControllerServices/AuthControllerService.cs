@@ -39,14 +39,19 @@ namespace BusinessLayer.Services.ControllerServices
             {
                 return new ErrorDataResult<LoginResponseDTO>(result.StatusCode, result.Message);
             }
-            var token = GenerateJwtToken(user);
+
+            var rolesResult = await _authDbService.GetUserRoles(user.Email);
+            var roles = rolesResult.Success ? rolesResult.Data : new List<string>();
+
+            var token = GenerateJwtToken(user, roles);
 
             var data =  new LoginResponseDTO
             {
                 Token = token,
                 userDTO = new UserDTO
                 {
-                    Email = user.Email
+                    Email = user.Email,
+                    Roles = roles,
                 }
             };
 
@@ -62,21 +67,25 @@ namespace BusinessLayer.Services.ControllerServices
 
             string userName = registerDTO.Email;
 
-            var result = await _authDbService.Register(registerDTO.Email, registerDTO.Password, registerDTO.FirstName, registerDTO.LastName, registerDTO.TcNumber, userName);
+            var result = await _authDbService.Register(registerDTO.Email, registerDTO.Password, registerDTO.FirstName, registerDTO.LastName, registerDTO.TcNumber, userName, registerDTO.Role);
             var user = result.Data;
             if (!result.Success)
             {
                 return new ErrorDataResult<RegisterResponseDTO>(result.StatusCode, result.Message);
             }
 
-            var token = GenerateJwtToken(user);
+            var rolesResult = await _authDbService.GetUserRoles(user.Email);
+            var roles = rolesResult.Success ? rolesResult.Data : new List<string>();
+
+            var token = GenerateJwtToken(user, roles);
 
             var data = new RegisterResponseDTO
             {
                 Message = result.Message,
                 userDTO = new UserDTO
                 {
-                    Email = user.Email
+                    Email = user.Email,
+                    Roles = roles,
                 },
                 Token = token
             };
@@ -84,7 +93,7 @@ namespace BusinessLayer.Services.ControllerServices
             return new SuccessDataResult<RegisterResponseDTO>(data);
         }
 
-        private string GenerateJwtToken(AppUser user)
+        private string GenerateJwtToken(AppUser user, List<string> roles)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -95,6 +104,11 @@ namespace BusinessLayer.Services.ControllerServices
             new(ClaimTypes.Name, user.UserName),
             new(ClaimTypes.Email, user.Email)
         };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var expiresAt = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Jwt:ExpiryMinutes"]));
 

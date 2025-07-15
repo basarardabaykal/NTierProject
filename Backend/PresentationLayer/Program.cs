@@ -9,7 +9,6 @@ using BusinessLayer.Services.ControllerServices;
 using BusinessLayer.Services.DbServices;
 using BusinessLayer.Validations;
 using CoreLayer.Entity;
-using DataLayer;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -102,6 +101,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("UserOrAdmin", policy => policy.RequireRole("Admin", "User"));
+});
+
 
 /*builder.Services.ConfigureApplicationCookie(options =>
 {
