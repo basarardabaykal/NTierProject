@@ -14,7 +14,9 @@ export default function Login() {
       console.log(response.data)
       if (response.data.success) {
         localStorage.setItem("token", response.data.data.token)
+        localStorage.setItem("user", JSON.stringify(response.data.data.userDTO))
         console.log("Successfully logged in.")
+        console.log("User roles:", response.data.data.userDTO.roles)
       }
     } catch (error) {
       console.log("An error occured.")
