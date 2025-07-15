@@ -14,5 +14,7 @@ namespace BusinessLayer.Congrate.Repository
         public Task<IDataResult<AppUser>> GetUserByEmail(string email);
         public Task<IDataResult<bool>> CheckPassword(AppUser user, string password);
         public Task<IDataResult<AppUser>> CreateUser(AppUser user, string password);
+        public Task<IDataResult<List<string>>> GetUserRoles(string email);
+        public  Task<IDataResult<bool>> AssignRole(AppUser user, string role);
     }
 }
