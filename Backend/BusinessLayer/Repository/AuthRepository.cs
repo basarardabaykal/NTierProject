@@ -28,7 +28,7 @@ namespace BusinessLayer.Repository
         {
             try
             {
-                var user = await _userManager.FindByNameAsync(email);
+                var user = await _userManager.FindByEmailAsync(email);
                 if (user == null)
                 {
                     throw new Exception("No user was found with this email.");
@@ -90,7 +90,7 @@ namespace BusinessLayer.Repository
         {
             try
             {
-                var user = await _userManager.FindByNameAsync(email);
+                var user = await _userManager.FindByEmailAsync(email);
                 if (user == null)
                 {
                     return new ErrorDataResult<List<string>>(404, "User not found.");

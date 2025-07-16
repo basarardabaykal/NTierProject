@@ -1,14 +1,18 @@
+import { jwtDecode } from "jwt-decode";
+
 export default function HomePage() {
+    const handleClick = async () => {
+        const token = localStorage.getItem("token");
+        const response = await fetch('https://localhost:7297/api/home/get', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        console.log(response);
+    }
     return (
         <>
-            <div>
-                <h1 className="mb-8">Hello World!</h1>
-                <p className="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                    in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div className="m-4">
+                <button onClick={handleClick}>Click me</button>
             </div>
         </>
     )

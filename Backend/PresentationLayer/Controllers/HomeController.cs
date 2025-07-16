@@ -6,6 +6,8 @@ using BusinessLayer.Dto;
 using BusinessLayer.Congrate.Services.DbServices;
 using BusinessLayer.Congrate.Services.ControllerServices;
 using CoreLayer.Utilities.Interfaces;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace NTierProject.Controllers
@@ -23,9 +25,12 @@ namespace NTierProject.Controllers
             _controllerService = controllerService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
+        [Authorize]
+        [HttpGet("get")]
+        public async Task<IActionResult> Get()
         {
+            Console.WriteLine("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
+            var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var result = await _controllerService.Get(id);
             return new ObjectResult(result)
             {
@@ -49,7 +54,7 @@ namespace NTierProject.Controllers
             
         }
 
-        [HttpGet("")]
+        [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
             var result = await _controllerService.GetAll();
