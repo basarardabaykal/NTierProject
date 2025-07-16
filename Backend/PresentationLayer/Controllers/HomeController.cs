@@ -29,7 +29,7 @@ namespace NTierProject.Controllers
         [HttpGet("get")]
         public async Task<IActionResult> Get()
         {
-            Console.WriteLine("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var result = await _controllerService.Get(id);
             return new ObjectResult(result)
@@ -54,9 +54,11 @@ namespace NTierProject.Controllers
             
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             var result = await _controllerService.GetAll();
             return new ObjectResult(result)
             {
