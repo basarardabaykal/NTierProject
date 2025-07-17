@@ -54,7 +54,6 @@ namespace NTierProject.Controllers
             
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {

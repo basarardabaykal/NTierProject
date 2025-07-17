@@ -1,13 +1,34 @@
 import UsersTable from "../components/UsersTable"
+import axios from "axios"
+import { useState } from "react"
+import { useEffect } from "react"
 
 export default function UsersPanel() {
-    const users = [
-        { email: "alice@example.com", name: "Alice Smith", company: "Tech Solutions Inc." },
-        { email: "bob@example.com", name: "Bob Johnson", company: "Global Innovations" },
-        { email: "charlie@example.com", name: "Charlie Brown", company: "Creative Designs LLC" },
-        { email: "diana@example.com", name: "Diana Prince", company: "Wonder Corp" },
-        { email: "eve@example.com", name: "Eve Adams", company: "Future Systems" },
-    ]
+    interface User {
+        name: string
+        email: string
+        company: string
+    }
+
+    const [users, setUsers] = useState<User[]>([])
+
+    const getUsers = async () => {
+        const response = await axios.get("https://localhost:7297/api/home/getall")
+        console.log(response.data.data)
+        if (response.data.success) {
+            const mappedUsers = response.data.data.map((user: any) => ({
+                name: user.firstname + " " + user.lastname,
+                email: user.email,
+                company: user.company
+            }))
+            setUsers(mappedUsers)
+        }
+    }
+
+    useEffect(() => {
+        getUsers()
+    }, [])
+
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-4">
