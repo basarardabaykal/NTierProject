@@ -2,14 +2,9 @@ import UsersTable from "../components/UsersTable"
 import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
+import type { User } from "../interfaces/User"
 
 export default function UsersPanel() {
-    interface User {
-        name: string
-        email: string
-        company: string
-    }
-
     const [users, setUsers] = useState<User[]>([])
 
     const getUsers = async () => {
@@ -19,6 +14,7 @@ export default function UsersPanel() {
             const mappedUsers = response.data.data.map((user: any) => ({
                 name: user.firstname + " " + user.lastname,
                 email: user.email,
+                tcnumber: user.tcnumber,
                 company: user.company
             }))
             setUsers(mappedUsers)
