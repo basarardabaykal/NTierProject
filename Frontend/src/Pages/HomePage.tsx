@@ -1,5 +1,3 @@
-import { jwtDecode } from "jwt-decode";
-
 export default function HomePage() {
     const handleClick1 = async () => {
         const token = localStorage.getItem("token");
