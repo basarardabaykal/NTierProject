@@ -1,24 +1,40 @@
 import UsersTable from "../components/UsersTable"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
 import type { User } from "../interfaces/User"
 
 export default function UsersPanel() {
+    const navigate = useNavigate()
     const [users, setUsers] = useState<User[]>([])
 
     const getUsers = async () => {
-        const response = await axios.get("https://localhost:7297/api/home/getall")
-        console.log(response.data.data)
-        if (response.data.success) {
-            const mappedUsers = response.data.data.map((user: any) => ({
-                name: user.firstname + " " + user.lastname,
-                email: user.email,
-                tcnumber: user.tcnumber,
-                company: user.company
-            }))
-            setUsers(mappedUsers)
+        try {
+            const token = localStorage.getItem("token")
+            if (!token) {
+                navigate("/login")
+            }
+            const response = await axios.get("https://localhost:7297/api/home/getall", {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+
+            if (response.data.success) {
+                const mappedUsers = response.data.data.map((user: any) => ({
+                    name: user.firstname + " " + user.lastname,
+                    email: user.email,
+                    tcnumber: user.tcnumber,
+                    company: user.company
+                }))
+                setUsers(mappedUsers)
+            }
+        } catch (error) {
+            console.log(error)
+            if (axios.isAxiosError(error) && error.response?.status === 401) {
+                navigate("/login")
+            }
         }
+
     }
 
     useEffect(() => {

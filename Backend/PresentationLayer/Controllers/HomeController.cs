@@ -54,6 +54,7 @@ namespace NTierProject.Controllers
             
         }
 
+        [Authorize]
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
