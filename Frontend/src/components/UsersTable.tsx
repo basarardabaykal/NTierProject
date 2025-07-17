@@ -8,7 +8,7 @@ interface UsersTableProps {
   companies: Company[]
 }
 
-export default function UsersPanel({ users, companies }: UsersTableProps) {
+export default function UsersTable({ users, companies }: UsersTableProps) {
   return (
     <div className="w-full overflow-auto rounded-md border">
       <Table>
@@ -26,7 +26,7 @@ export default function UsersPanel({ users, companies }: UsersTableProps) {
               <TableCell>{user.name}</TableCell>
               <TableCell className="font-medium">{user.email}</TableCell>
               <TableCell>{user.tcnumber}</TableCell>
-              <TableCell><CompanySelector companies={companies}></CompanySelector></TableCell>
+              <TableCell><CompanySelector companies={companies} defaultCompanyId={user.companyId}></CompanySelector></TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -20,13 +20,14 @@ export default function UsersPanel() {
             const response = await axios.get("https://localhost:7297/api/home/getall", {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
-
+            console.log("", response)
             if (response.data.success) {
                 const mappedUsers = response.data.data.map((user: any) => ({
+                    id: user.id,
                     name: user.firstname + " " + user.lastname,
                     email: user.email,
                     tcnumber: user.tcnumber,
-                    company: user.company
+                    companyId: user.companyId
                 }))
                 setUsers(mappedUsers)
             }
@@ -48,10 +49,11 @@ export default function UsersPanel() {
             const response = await axios.get("https://localhost:7297/api/company/getall", {
                 headers: { 'Authorization': `Bearer ${token}` }
             })
-
+            console.log("", response)
             if (response.data.success) {
                 const mappedCompanies = response.data.data.map((company: any) => ({
-                    name: company.name
+                    name: company.name,
+                    id: company.id,
                 }))
                 setCompanies(mappedCompanies)
             }
@@ -65,8 +67,8 @@ export default function UsersPanel() {
     }
 
     useEffect(() => {
-        getUsers()
         getCompanies()
+        getUsers()
     }, [])
 
 
