@@ -1,11 +1,14 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 import type { User } from "../interfaces/User"
+import type { Company } from "../interfaces/Company"
+import CompanySelector from "./CompanySelector"
 
 interface UsersTableProps {
   users: User[]
+  companies: Company[]
 }
 
-export default function UsersPanel({ users }: UsersTableProps) {
+export default function UsersPanel({ users, companies }: UsersTableProps) {
   return (
     <div className="w-full overflow-auto rounded-md border">
       <Table>
@@ -23,7 +26,7 @@ export default function UsersPanel({ users }: UsersTableProps) {
               <TableCell>{user.name}</TableCell>
               <TableCell className="font-medium">{user.email}</TableCell>
               <TableCell>{user.tcnumber}</TableCell>
-              <TableCell>{user.company}</TableCell>
+              <TableCell><CompanySelector companies={companies}></CompanySelector></TableCell>
             </TableRow>
           ))}
         </TableBody>

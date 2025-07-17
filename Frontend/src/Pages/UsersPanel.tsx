@@ -73,7 +73,7 @@ export default function UsersPanel() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-center p-4">
             <h1 className="mb-6 text-3xl font-bold">User Directory</h1>
-            <UsersTable users={users} />
+            <UsersTable users={users} companies={companies} />
         </main>
     )
 }
