@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,6 +19,7 @@ export default function Login() {
         localStorage.setItem("user", JSON.stringify(response.data.data.userDTO))
         console.log("Successfully logged in.")
         console.log("User roles:", response.data.data.userDTO.roles)
+        navigate("/")
       }
     } catch (error) {
       console.log("An error occured.")
