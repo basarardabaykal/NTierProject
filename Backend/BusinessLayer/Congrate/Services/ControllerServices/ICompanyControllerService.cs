@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Dto;
+using CoreLayer.Entity;
+using CoreLayer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

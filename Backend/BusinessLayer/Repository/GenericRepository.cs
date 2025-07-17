@@ -35,5 +35,10 @@ namespace BusinessLayer.Repository
             await _dbSet.AddAsync(item);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<IDataResult<List<TEntity>>> GetAll()
+        {
+            var result = await _dbSet.ToListAsync();
+            return new SuccessDataResult<List<TEntity>>(result, "Tüm kullanıcılar başarıyla bulundu.");
+        }
     }
 }

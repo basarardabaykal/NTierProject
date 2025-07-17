@@ -14,6 +14,7 @@ namespace BusinessLayer.Congrate.Repository
         public Task<IDataResult<TEntity>> Get(Guid id);
         
         public Task Add(TEntity item);
+        public Task<IDataResult<List<TEntity>>> GetAll();
     }
     
 }

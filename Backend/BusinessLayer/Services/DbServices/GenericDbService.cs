@@ -2,6 +2,7 @@
 using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Congrate.Services.DbServices;
 using BusinessLayer.Dto;
+using BusinessLayer.Repository;
 using CoreLayer.Entity;
 using CoreLayer.Utilities.Interfaces;
 using CoreLayer.Utilities.Results;
@@ -37,6 +38,16 @@ namespace BusinessLayer.Services.DbServices
         {
             TEntity Item = _mapper.Map<TEntity>(dto);
             await _repo.Add(Item);
+        }
+        public async Task<IDataResult<List<TDto>>> GetAll()
+        {
+            var Item = await _repo.GetAll();
+            if (Item.Success != true)
+            {
+                return new ErrorDataResult<List<TDto>>(Item.StatusCode, Item.Message);
+            }
+            var dto = _mapper.Map<List<TDto>>(Item.Data);
+            return new SuccessDataResult<List<TDto>>(dto, Item.Message);
         }
     }
 }

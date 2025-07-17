@@ -10,6 +10,5 @@ namespace BusinessLayer.Congrate.Repository
 {
     public interface IUserRepository : IGenericRepository<AppUser>
     {
-        public Task<IDataResult<List<AppUser>>> GetAll();
     }
 }

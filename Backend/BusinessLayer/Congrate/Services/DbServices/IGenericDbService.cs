@@ -15,5 +15,6 @@ namespace BusinessLayer.Congrate.Services.DbServices
 
 
         public Task Add(TDto dto);
+        public Task<IDataResult<List<TDto>>> GetAll();
     }
 }

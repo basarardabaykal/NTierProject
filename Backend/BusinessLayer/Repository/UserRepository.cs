@@ -19,12 +19,6 @@ namespace BusinessLayer.Repository
     {
         public UserRepository(DataLayer.DbContext dbContext) : base (dbContext) { }
 
-        public async Task<IDataResult<List<AppUser>>> GetAll()
-        {
-            var result = await _dbSet.ToListAsync();
-            return new SuccessDataResult<List<AppUser>>(result, "Tüm kullanıcılar başarıyla bulundu.");
-        }
-
     }
 }
 

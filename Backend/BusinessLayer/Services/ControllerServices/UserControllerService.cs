@@ -17,15 +17,9 @@ namespace BusinessLayer.Services.ControllerServices
 {
     public class UserControllerService : GenericControllerService<UserDTO>, IUserControllerService
     {
-        private readonly IUserDbService _userDbService; 
         public UserControllerService(IUserDbService dbService) : base (dbService) 
         {
-            _userDbService = dbService;
         }
 
-        public async Task<IDataResult<List<AppUser>>> GetAll()
-        {
-            return await _userDbService.GetAll();
-        }
     }
 }

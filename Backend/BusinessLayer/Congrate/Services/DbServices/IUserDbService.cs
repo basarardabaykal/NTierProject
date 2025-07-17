@@ -11,6 +11,5 @@ namespace BusinessLayer.Congrate.Services.DbServices
 {
     public interface IUserDbService : IGenericDbService<UserDTO>
     {
-        public Task<IDataResult<List<AppUser>>> GetAll();
     }
 }

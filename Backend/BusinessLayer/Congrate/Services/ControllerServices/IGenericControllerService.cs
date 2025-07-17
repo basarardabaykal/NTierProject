@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Dto;
+using CoreLayer.Entity;
 using CoreLayer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
       
         Task<IDataResult<T>> Get(Guid id);
 
-        public Task Add(T dto); 
+        public Task Add(T dto);
+        public Task<IDataResult<List<T>>> GetAll();
 
     }
 }

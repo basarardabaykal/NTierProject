@@ -42,6 +42,16 @@ namespace NTierProject.Controllers
                 return Ok("Kayıt esnasında bir hatayla karşılaşıldı.");
             }
         }
+        [HttpGet("getall")]
+        public async Task<IActionResult> GetAll()
+        {
+            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            var result = await _controllerService.GetAll();
+            return new ObjectResult(result)
+            {
+                StatusCode = 200
+            };
+        }
 
     }
 }

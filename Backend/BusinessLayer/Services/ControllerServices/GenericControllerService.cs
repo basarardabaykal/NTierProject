@@ -26,5 +26,9 @@ namespace BusinessLayer.Services.ControllerServices
         {
             await _dbService.Add(dto);
         }
+        public async Task<IDataResult<List<T>>> GetAll()
+        {
+            return await _dbService.GetAll();
+        }
     }
 }
