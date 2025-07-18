@@ -1,13 +1,15 @@
-﻿using DataLayer;
-using NTierProject;
-using Microsoft.AspNetCore.Mvc;
-using CoreLayer;
-using BusinessLayer.Dto;
+﻿using BusinessLayer.Congrate.Services.ControllerServices;
 using BusinessLayer.Congrate.Services.DbServices;
-using BusinessLayer.Congrate.Services.ControllerServices;
+using BusinessLayer.Dto;
+using CoreLayer;
 using CoreLayer.Utilities.Interfaces;
-using System.Security.Claims;
+using DataLayer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using NTierProject;
+using Sprache;
+using System.Security.Claims;
 
 
 namespace NTierProject.Controllers
@@ -29,7 +31,6 @@ namespace NTierProject.Controllers
         [HttpGet("get")]
         public async Task<IActionResult> Get()
         {
-            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             var id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             var result = await _controllerService.Get(id);
             return new ObjectResult(result)
@@ -58,7 +59,6 @@ namespace NTierProject.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {
-            Console.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             var result = await _controllerService.GetAll();
             return new ObjectResult(result)
             {
@@ -66,6 +66,7 @@ namespace NTierProject.Controllers
             };
         }
 
+        [Authorize]
         [HttpPatch("updatecompany")]
         public async Task<IActionResult> UpdateCompanyId([FromBody] UserDTO userDTO)
         {
@@ -73,7 +74,7 @@ namespace NTierProject.Controllers
             return new ObjectResult(result)
             {
                 StatusCode = result.StatusCode,
-            };
+            };     
         }
     }
 }
