@@ -11,9 +11,18 @@ namespace BusinessLayer.Services.DbServices
 {
     public class UserDbService : GenericDbService<UserDTO, AppUser>, IUserDbService
     {
-        public UserDbService(IGenericRepository<AppUser> repo, IMapper mapper)
+        private readonly IUserRepository _repo;
+        public UserDbService(IUserRepository repo, IMapper mapper)
         : base(repo, mapper)
         {
+            _repo = repo;
+        }
+
+        public async Task<IDataResult<UserDTO>> UpdateCompanyId(UserDTO userDTO)
+        {
+            AppUser user = _mapper.Map<AppUser>(userDTO);
+            var result = await _repo.UpdateCompanyId(user);
+            return new SuccessDataResult<UserDTO>(result.Message);
         }
     }
 }

@@ -11,5 +11,6 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
 {
     public interface IUserControllerService : IGenericControllerService<UserDTO>
     {
+        public Task<IDataResult<UserDTO>> UpdateCompanyId(UserDTO userDTO);
     }
 }

@@ -12,14 +12,21 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using CoreLayer.Utilities.Interfaces;
 using BusinessLayer.Services.DbServices;
+using CoreLayer.Utilities.Results;
 
 namespace BusinessLayer.Services.ControllerServices
 {
     public class UserControllerService : GenericControllerService<UserDTO>, IUserControllerService
     {
+        private readonly IUserDbService _dbService;
         public UserControllerService(IUserDbService dbService) : base (dbService) 
         {
+            _dbService = dbService;
         }
-
+        public async Task<IDataResult<UserDTO>> UpdateCompanyId(UserDTO userDTO)
+        {
+            var result = await _dbService.UpdateCompanyId(userDTO);
+            return new SuccessDataResult<UserDTO>(result.Message);
+        }
     }
 }

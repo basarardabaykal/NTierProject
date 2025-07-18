@@ -10,5 +10,6 @@ namespace BusinessLayer.Congrate.Repository
 {
     public interface IUserRepository : IGenericRepository<AppUser>
     {
+        public Task<IDataResult<AppUser>> UpdateCompanyId(AppUser user);
     }
 }

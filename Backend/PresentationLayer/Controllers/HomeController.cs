@@ -62,7 +62,17 @@ namespace NTierProject.Controllers
             var result = await _controllerService.GetAll();
             return new ObjectResult(result)
             {
-                StatusCode = 200
+                StatusCode = result.StatusCode,
+            };
+        }
+
+        [HttpPatch("updatecompany")]
+        public async Task<IActionResult> UpdateCompanyId([FromBody] UserDTO userDTO)
+        {
+            var result = await _controllerService.UpdateCompanyId(userDTO);
+            return new ObjectResult(result)
+            {
+                StatusCode = result.StatusCode,
             };
         }
     }
