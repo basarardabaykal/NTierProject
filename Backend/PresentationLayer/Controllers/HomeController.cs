@@ -66,7 +66,7 @@ namespace NTierProject.Controllers
             };
         }
 
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         [HttpPatch("updatecompany")]
         public async Task<IActionResult> UpdateCompanyId([FromBody] UserDTO userDTO)
         {
