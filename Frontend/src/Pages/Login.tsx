@@ -16,8 +16,8 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod"
 
 const loginSchema = z.object({
-  email: z.string().email("Invalid email adress"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  email: z.email("Invalid email adress"),
+  password: z.string("Invalid password"),
 })
 
 export default function Login() {
