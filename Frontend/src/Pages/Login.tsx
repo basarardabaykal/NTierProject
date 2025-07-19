@@ -112,7 +112,7 @@ export default function Login() {
         </CardFooter>
         <CardFooter className="flex justify-center">
           <CardAction className="flex justify-center items-center">
-            <Button variant="link"><Link to={"/register"}>Sign Up</Link> </Button>
+            <Button variant="link"><Link to={"/signup"}>Sign Up</Link> </Button>
           </CardAction>
         </CardFooter>
       </Card>
