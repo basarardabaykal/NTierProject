@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import Navbar from './components/Navbar'
 import HomePage from './Pages/HomePage'
 import Login from './Pages/Login'
-import Register from './Pages/Register'
+import Signup from './Pages/Signup'
 import UsersPanel from './Pages/UsersPanel'
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<UsersPanel />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
 
       </div>

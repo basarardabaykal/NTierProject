@@ -12,7 +12,7 @@ import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
 import { useState } from "react";
 import axios from "axios"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod"
 
 const loginSchema = z.object({
@@ -112,7 +112,7 @@ export default function Login() {
         </CardFooter>
         <CardFooter className="flex justify-center">
           <CardAction className="flex justify-center items-center">
-            <Button variant="link">Sign Up</Button>
+            <Button variant="link"><Link to={"/register"}>Sign Up</Link> </Button>
           </CardAction>
         </CardFooter>
       </Card>
