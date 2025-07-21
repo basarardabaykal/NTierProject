@@ -37,12 +37,12 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="absolute top-0 w-full h-12 border-b-1 bg-red-400 border-black flex items-center justify-center">
-        <div className="w-3/4 flex flex-row justify-between items-center">
-          <p className="text-black text-xl"></p>
+      <div className="absolute top-0 w-full h-16 border-b-2 bg-black border-gray-400 flex items-center justify-center">
+        <div className="w-3/4 flex flex-row justify-between items-center text-white text-xl">
+          <Link to={"/"}>Home</Link>
           {isAuthenticated ?
-            (<button onClick={logout} className="text-black text-xl">Logout</button>) :
-            (<Link to={"/login"} className="text-black text-xl ">Login</Link>)}
+            (<button onClick={logout}>Logout</button>) :
+            (<Link to={"/login"}>Login</Link>)}
         </div>
       </div>
     </>
