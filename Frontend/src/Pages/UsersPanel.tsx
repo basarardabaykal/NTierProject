@@ -13,7 +13,7 @@ export default function UsersPanel() {
 
   const getUsers = async () => {
     try {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token") //to be changed
       if (!token) {
         navigate("/login")
       }

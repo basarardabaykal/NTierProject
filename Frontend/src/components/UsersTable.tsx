@@ -2,7 +2,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import type { User } from "../interfaces/User"
 import type { Company } from "../interfaces/Company"
 import CompanySelector from "./CompanySelector"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useAuth } from "../context/AuthContext"
 
 interface UsersTableProps {
   users: User[]
@@ -12,6 +13,7 @@ interface UsersTableProps {
 
 export default function UsersTable({ users, companies, onUpdateUserCompany }: UsersTableProps) {
   const [savingUserId, setSavingUserId] = useState<string | null>(null)
+  const { isAdmin } = useAuth()
 
   const handleSave = async (userId: string, newCompanyId: string) => {
     setSavingUserId(userId)
@@ -40,12 +42,16 @@ export default function UsersTable({ users, companies, onUpdateUserCompany }: Us
               <TableCell className="font-medium">{user.email}</TableCell>
               <TableCell>{user.tcnumber}</TableCell>
               <TableCell>
-                <CompanySelector
-                  companies={companies}
-                  defaultCompanyId={user.companyId}
-                  onSave={(newCompanyId) => handleSave(user.id, newCompanyId)}
-                  isSaving={savingUserId == user.id}
-                />
+                {isAdmin() ? (
+                  <CompanySelector
+                    companies={companies}
+                    defaultCompanyId={user.companyId}
+                    onSave={(newCompanyId) => handleSave(user.id, newCompanyId)}
+                    isSaving={savingUserId == user.id}
+                  />
+                ) : (
+                  <p>{companies.find(company => company.id == user.companyId)?.name}</p>
+                )}
               </TableCell>
             </TableRow>
           ))}
