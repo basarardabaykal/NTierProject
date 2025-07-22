@@ -14,6 +14,7 @@ import { useState } from "react";
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod"
+import { useAuth } from "../context/AuthContext";
 
 const loginSchema = z.object({
   email: z.email("Invalid email adress"),
@@ -22,6 +23,7 @@ const loginSchema = z.object({
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -46,9 +48,8 @@ export default function Login() {
         password: password,
       })
       if (response.data.success) {
-        localStorage.setItem("token", response.data.data.token)
+        login(response.data.data.token)
         localStorage.setItem("user", JSON.stringify(response.data.data.userDTO))
-        window.dispatchEvent(new Event("storage"))
         setIsError(false)
         setErrorMessage("Successfully logged in, you will be redirected shortly.")
         await new Promise((resolve) => setTimeout(resolve, 2000));
