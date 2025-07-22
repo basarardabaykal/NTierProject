@@ -48,7 +48,7 @@ export default function Login() {
         password: password,
       })
       if (response.data.success) {
-        login(response.data.data.userDTO, response.data.data.token)
+        login(response.data.data.token)
         localStorage.setItem("user", JSON.stringify(response.data.data.userDTO))
         setIsError(false)
         setErrorMessage("Successfully logged in, you will be redirected shortly.")
