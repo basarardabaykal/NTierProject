@@ -9,12 +9,15 @@ function App() {
 
   return (
     <>
-      <Navbar></Navbar>
-      <div className='w-3/4 m-auto'>
+
+
+
+      <div className='m-auto'>
         <Routes>
-          <Route path="/" element={<UsersPanel />} />
+          <Route path="/panel" element={<UsersPanel />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
 

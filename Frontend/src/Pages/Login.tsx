@@ -72,7 +72,7 @@ export default function Login() {
   }
   return (
     <>
-      <Card className="w-full max-w-sm m-auto">
+      <Card className="max-w-sm m-auto w-3/4">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>

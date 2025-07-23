@@ -99,7 +99,7 @@ export default function Signup() {
   }
   return (
     <>
-      <Card className="w-full max-w-sm m-auto">
+      <Card className="w-3/4 max-w-sm m-auto">
         <CardHeader>
           <CardTitle>Create a new account</CardTitle>
           <CardDescription>
