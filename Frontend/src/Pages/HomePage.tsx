@@ -3,6 +3,7 @@ import securifyLogo from "../assets/securify.avif"
 import image1 from "../assets/image1.png"
 import WorldMap from "../components/ui/world-map"
 import { GlareCard } from "../components/ui/glare-card"
+import { PointerHighlight } from "../components/ui/pointer-highlight"
 
 export default function HomePage() {
 	const [scrollY, setScrollY] = useState(0)
@@ -80,8 +81,10 @@ export default function HomePage() {
 						<p>Powerful</p>
 					</GlareCard>
 				</div>
-				<p className="text-5xl mt-40">
-					→ Try it for free and see the difference.</p>
+				<div className="text-5xl mt-40 flex flex-row justify-center">
+					<PointerHighlight>Try it</PointerHighlight>
+					<p className="ml-6">for free and see the difference.</p>
+				</div>
 			</div>
 
 		</div >
