@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { useSmoothScroll } from "../components/SmoothScroll";
 import securifyLogo from "../assets/securify.avif"
 import image1 from "../assets/image1.png"
 import WorldMap from "../components/ui/world-map"
@@ -18,6 +19,8 @@ export default function HomePage() {
 		window.addEventListener("scroll", onScroll)
 		return () => window.removeEventListener("scroll", onScroll)
 	}, [])
+
+	useSmoothScroll()
 
 	return (
 		<div ref={containerRef} className=" bg-gradient-to-tr from-pink-600 via-blue-700 to-purple-600 py-4 text-white">
