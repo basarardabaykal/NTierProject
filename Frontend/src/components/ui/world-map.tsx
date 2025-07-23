@@ -1,5 +1,8 @@
 "use client";
 
+import { useInView } from "framer-motion";
+
+
 import { useRef, useMemo, useCallback } from "react";
 import { motion } from "motion/react";
 import DottedMap from "dotted-map";
@@ -109,8 +112,14 @@ export default function WorldMap({
     </g>
   ), []);
 
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { margin: "-100px" });
+
   return (
-    <div className="w-full aspect-[2/1] dark:bg-black bg-white rounded-lg relative font-sans">
+    <div
+      ref={containerRef}
+      className="w-full aspect-[2/1] dark:bg-black bg-white rounded-lg relative font-sans"
+    >
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
         className="h-full w-full [mask-image:linear-gradient(to_bottom,transparent,white_10%,white_90%,transparent)] pointer-events-none select-none"
@@ -144,7 +153,7 @@ export default function WorldMap({
             strokeWidth="1"
             variants={pathVariants}
             initial="initial"
-            animate="animate"
+            animate={isInView ? "animate" : "initial"}
             transition={getAnimationTransition(i)}
           />
         ))}

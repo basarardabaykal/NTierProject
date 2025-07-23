@@ -85,7 +85,7 @@ export default function HomePage() {
 					</GlareCard>
 				</div>
 				<div className="text-5xl mt-60 flex flex-row justify-center">
-					<PointerHighlight>Try it</PointerHighlight>
+					<PointerHighlight><a href="panel">Try it</a></PointerHighlight>
 					<p className="ml-6">for free and see the difference.</p>
 				</div>
 			</div>
