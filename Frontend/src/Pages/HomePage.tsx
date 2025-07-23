@@ -23,7 +23,7 @@ export default function HomePage() {
 	useSmoothScroll()
 
 	return (
-		<div ref={containerRef} className=" bg-gradient-to-tr from-pink-600 via-blue-700 to-purple-600 py-4 text-white">
+		<div ref={containerRef} className=" bg-gradient-to-tr from-indigo-200 via-purple-200 to-pink-200 py-4 text-neutral-900">
 			<div>
 				<img src={image1} className="w-7/12 ml-4 rounded-2xl" alt="" />
 			</div>
@@ -37,13 +37,13 @@ export default function HomePage() {
 						transform: `translateY(${Math.min(0, 650 - scrollY)}px)`
 					}}
 				>
-					<p className="text-6xl font-bold mb-8">Manage Your Employees, Increase Your Productivity!</p>
-					<img src={securifyLogo} alt="" />
+					<p className="text-6xl font-bold mb-16">Manage Your Employees, Increase Your Productivity!</p>
+					<img src={securifyLogo} className="filter invert" alt="" />
 				</div>
 			</div>
 
-			<div className="w-4/5 mx-auto mt-60">
-				<p className="text-6xl mb-20">Don't Let Distances Affect Your Workflow</p>
+			<div className="w-4/5 mx-auto mt-80">
+				<p className="text-6xl mb-28">Don't Let Distances Affect Your Workflow</p>
 				<div className="w-4/5 mx-auto">
 					<WorldMap lineColor="blue"
 						dots={[
@@ -69,11 +69,11 @@ export default function HomePage() {
 
 			</div >
 
-			<div className="mt-80 max-w-5/6 mx-auto pb-40">
+			<div className="mt-80 max-w-5/6 mx-auto pb-80">
 				<p className="text-7xl">Smarter Employee Management Starts Here</p>
 				<p className="text-4xl mt-40">Ditch the spreadsheets. Save time, stay organized, and manage your team like a pro with our all-in-one employee management platform.</p>
 
-				<div className="flex flex-row justify-evenly mt-40">
+				<div className="flex flex-row justify-evenly mt-80">
 					<GlareCard>
 						<p>Simple</p>
 					</GlareCard>
@@ -84,7 +84,7 @@ export default function HomePage() {
 						<p>Powerful</p>
 					</GlareCard>
 				</div>
-				<div className="text-5xl mt-40 flex flex-row justify-center">
+				<div className="text-5xl mt-60 flex flex-row justify-center">
 					<PointerHighlight>Try it</PointerHighlight>
 					<p className="ml-6">for free and see the difference.</p>
 				</div>
