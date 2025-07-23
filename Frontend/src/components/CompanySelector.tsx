@@ -39,7 +39,7 @@ export default function CompanySelector({ companies, defaultCompanyId, onSave, i
   const displayValue = selectedCompany ? selectedCompany.name : "Unassigned"
 
   return (
-    <div>
+    <div className="flex flex-row justify-center">
       <Select value={displayValue} onValueChange={handleValueChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder={"Company"} />

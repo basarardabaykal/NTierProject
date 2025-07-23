@@ -25,10 +25,10 @@ export default function UsersTable({ users, companies, onUpdateUserCompany }: Us
   }
 
   return (
-    <div className="w-full overflow-auto rounded-md border">
+    <div className="overflow-auto rounded-xl border shadow-sm w-3/4 bg-white">
       <Table>
         <TableHeader>
-          <TableRow>
+          <TableRow >
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Tc Number</TableHead>
@@ -38,9 +38,9 @@ export default function UsersTable({ users, companies, onUpdateUserCompany }: Us
         <TableBody>
           {users.map((user, index) => (
             <TableRow key={index}>
-              <TableCell>{user.name}</TableCell>
-              <TableCell className="font-medium">{user.email}</TableCell>
-              <TableCell>{user.tcnumber}</TableCell>
+              <TableCell className="py-4 px-6">{user.name}</TableCell>
+              <TableCell className="py-4 px-6 font-medium">{user.email}</TableCell>
+              <TableCell className="py-4 px-6">{user.tcnumber}</TableCell>
               <TableCell>
                 {isAdmin() ? (
                   <CompanySelector

@@ -113,9 +113,9 @@ export default function UsersPanel() {
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 w-3/4">
-      <h1 className="mb-6 text-3xl font-bold">Users Table</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center p-4 w-full">
+      <p className="mb-8 text-4xl font-extrabold tracking-tight text-gray-800 dark:text-white">Users Table</p>
       <UsersTable users={users} companies={companies} onUpdateUserCompany={updateUserCompany} />
-    </main>
+    </div>
   )
 }
