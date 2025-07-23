@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import securifyLogo from "../assets/securify.avif"
 import image1 from "../assets/image1.png"
+import WorldMap from "../components/ui/world-map"
 
 export default function HomePage() {
 	const [scrollY, setScrollY] = useState(0)
@@ -36,6 +37,33 @@ export default function HomePage() {
 				</div>
 			</div>
 
+			<div className="w-4/5 mx-auto mt-60">
+				<p className="text-6xl mb-20">Don't Let Distances Affect Your Workflow</p>
+				<div className="w-4/5 mx-auto">
+					<WorldMap lineColor="blue"
+						dots={[
+							{
+								start: { lat: 26, lng: 34, label: "Start Point" },
+								end: { lat: 5, lng: 55, label: "End Point" },
+							},
+							{
+								start: { lat: 30, lng: -80 },
+								end: { lat: 40, lng: 10 },
+							},
+							{
+								start: { lat: 25, lng: 140 },
+								end: { lat: 20, lng: 100 },
+							},
+							{
+								start: { lat: -40, lng: 25 },
+								end: { lat: -50, lng: 145 },
+							},
+						]}
+					></WorldMap>
+				</div>
+
+			</div >
+
 			<div className="mt-80 max-w-5/6 mx-auto pb-40">
 				<p className="text-7xl">Smarter Employee Management Starts Here</p>
 				<p className="text-4xl mt-40">Ditch the spreadsheets. Save time, stay organized, and manage your team like a pro with our all-in-one employee management platform.</p>
@@ -43,6 +71,7 @@ export default function HomePage() {
 				<p className="text-5xl mt-40">Simple. Fast. Powerful.
 					→ Try it free and see the difference.</p>
 			</div>
-		</div>
+
+		</div >
 	)
 }
