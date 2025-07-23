@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import securifyLogo from "../assets/securify.avif"
 import image1 from "../assets/image1.png"
 import WorldMap from "../components/ui/world-map"
+import { GlareCard } from "../components/ui/glare-card"
 
 export default function HomePage() {
 	const [scrollY, setScrollY] = useState(0)
@@ -68,8 +69,19 @@ export default function HomePage() {
 				<p className="text-7xl">Smarter Employee Management Starts Here</p>
 				<p className="text-4xl mt-40">Ditch the spreadsheets. Save time, stay organized, and manage your team like a pro with our all-in-one employee management platform.</p>
 
-				<p className="text-5xl mt-40">Simple. Fast. Powerful.
-					→ Try it free and see the difference.</p>
+				<div className="flex flex-row justify-evenly mt-40">
+					<GlareCard>
+						<p>Simple</p>
+					</GlareCard>
+					<GlareCard>
+						<p>Fast</p>
+					</GlareCard>
+					<GlareCard>
+						<p>Powerful</p>
+					</GlareCard>
+				</div>
+				<p className="text-5xl mt-40">
+					→ Try it for free and see the difference.</p>
 			</div>
 
 		</div >
