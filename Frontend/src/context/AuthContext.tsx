@@ -45,7 +45,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             localStorage.removeItem("token")
           }
 
-          const user = response.data.data
+          const userData = response.data.data
+
+          const user: User = {
+            id: userData.id,
+            firstName: userData.firstname,
+            lastName: userData.lastname,
+            email: userData.email,
+            tcnumber: userData.tcnumber,
+            companyId: userData.companyId,
+            roles: userData.roles,
+          };
 
           setUser(user)
           setIsAuthenticated(true)
