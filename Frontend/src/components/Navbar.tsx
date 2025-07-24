@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { href, Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import { FloatingDock } from "./ui/floating-dock"
+import { IconHome, IconUser, IconLogin2, IconLogout2, IconTable } from "@tabler/icons-react";
+
 
 export default function Navbar() {
   const navigate = useNavigate()
@@ -20,21 +23,51 @@ export default function Navbar() {
     }
   }, [])
 
+
   return (
     <>
-      <div className="absolute top-0 w-full h-16 border-b-2 bg-black border-gray-400 flex items-center justify-center">
-        <div className="w-3/4 flex flex-row justify-between items-center text-white text-xl">
-          <Link to={"/"}>Home</Link>
-          {isAuthenticated ?
-            (<button
-              onClick={() => {
+      <FloatingDock
+        items={[
+          {
+            title: "Home",
+            icon: <IconHome className="w-full h-full" />,
+            onClick: () => {
+              navigate("/")
+            }
+          },
+          {
+            title: "IconTable",
+            icon: <IconTable className="w-full h-full" />,
+            onClick: () => {
+              navigate("/panel")
+            }
+          },
+          {
+            title: "Profile",
+            icon: <IconUser className="w-full h-full" />,
+            onClick: () => {
+              navigate("/profile")
+            }
+          },
+          isAuthenticated ?
+            {
+              title: "Logout",
+              icon: <IconLogout2 className="w-full h-full" />,
+              onClick: () => {
                 logout()
                 navigate("/login")
-              }}
-            >Logout</button>) :
-            (<Link to={"/login"}>Login</Link>)}
-        </div>
-      </div>
+              }
+            } :
+
+            {
+              title: "Login",
+              icon: <IconLogin2 className="w-full h-full" />,
+              onClick: () => {
+                navigate("/login")
+              }
+            },
+        ]}
+      ></FloatingDock >
     </>
   )
 }
