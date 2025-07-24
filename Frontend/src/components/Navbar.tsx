@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="fixed left-1/2 -translate-x-1/2 bottom-8">
+      <div className="fixed left-1/2 -translate-x-1/2 bottom-8 z-50">
         <FloatingDock
           items={[
             {

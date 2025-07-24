@@ -23,7 +23,7 @@ export default function HomePage() {
 	useSmoothScroll()
 
 	return (
-		<div ref={containerRef} className=" bg-gradient-to-tr from-indigo-200 via-purple-200 to-pink-200 py-4 text-neutral-900">
+		<div ref={containerRef} className=" bg-gradient-to-tr from-pink-400 via-purple-300 to-indigo-400 py-4 text-neutral-900">
 			<div>
 				<img src={image1} className="w-7/12 ml-4 rounded-2xl" alt="" />
 			</div>
