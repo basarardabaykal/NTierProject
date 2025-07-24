@@ -35,5 +35,14 @@ namespace PresentationLayer.Controllers
                 StatusCode = result.StatusCode,
             };
         }
+        [HttpPost("get")]
+        public async Task<IActionResult> Get([FromBody] string jwtToken)
+        {
+            var result = await _controllerService.GetUser(jwtToken);
+            return new ObjectResult(result)
+            {
+                StatusCode = result.StatusCode,
+            };
+        }
     }
 }

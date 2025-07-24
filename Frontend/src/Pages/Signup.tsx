@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 import axios from "axios"
 import {
   Card,
@@ -29,6 +30,7 @@ const signupSchema = z.object({
 })
 
 export default function Signup() {
+  const { login } = useAuth()
   const navigate = useNavigate()
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
@@ -74,8 +76,7 @@ export default function Signup() {
         }
       })
       if (response.data.success) {
-        localStorage.setItem("token", response.data.data.token)
-        localStorage.setItem("user", JSON.stringify(response.data.data.userDTO))
+        login(response.data.data.token, response.data.data.userDTO)
         window.dispatchEvent(new Event("storage"))
         setIsError(false)
         setErrorMessage("Successfully signed up, you will be redirected shortly")

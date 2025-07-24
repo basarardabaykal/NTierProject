@@ -19,6 +19,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BusinessLayer.Services.ControllerServices
 {
     public class AuthControllerService : IAuthControllerService
@@ -35,6 +36,7 @@ namespace BusinessLayer.Services.ControllerServices
         { 
             var result = await _authDbService.Login(loginDTO.Email, loginDTO.Password);
             var user = result.Data;
+        
             if (!result.Success)
             {
                 return new ErrorDataResult<LoginResponseDTO>(result.StatusCode, result.Message);
@@ -49,8 +51,13 @@ namespace BusinessLayer.Services.ControllerServices
             {
                 Token = token,
                 userDTO = new UserDTO
-                {
+                {   
+                    Id = user.Id,
+                    Firstname = user.Firstname,
+                    Lastname = user.Lastname,
+                    Tcnumber = user.Tcnumber,
                     Email = user.Email,
+                    CompanyId = user.CompanyId,
                     Roles = roles,
                 }
             };
@@ -84,13 +91,27 @@ namespace BusinessLayer.Services.ControllerServices
                 Message = result.Message,
                 userDTO = new UserDTO
                 {
+                    Id = user.Id,
+                    Firstname = user.Firstname,
+                    Lastname = user.Lastname,
+                    Tcnumber = user.Tcnumber,
                     Email = user.Email,
+                    CompanyId = user.CompanyId,
                     Roles = roles,
                 },
                 Token = token
             };
 
             return new SuccessDataResult<RegisterResponseDTO>(data);
+        }
+
+        public async Task<IDataResult<UserDTO>> GetUser(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+            var email = jwtToken.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress")?.Value;
+            
+            return await _authDbService.GetUser(email);
         }
 
         private string GenerateJwtToken(AppUser user, List<string> roles)

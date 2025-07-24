@@ -1,4 +1,5 @@
-﻿using CoreLayer.Entity;
+﻿using BusinessLayer.Dto;
+using CoreLayer.Entity;
 using CoreLayer.Utilities.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -14,5 +15,6 @@ namespace BusinessLayer.Congrate.Services.DbServices
         public Task<IDataResult<AppUser>> Login(string email, string password);
         public Task<IDataResult<AppUser>> Register(string email, string password, string firstName, string lastName, string tcNumber, string userName, string role);
         public Task<IDataResult<List<string>>> GetUserRoles(string email);
+        public Task<IDataResult<UserDTO>> GetUser(string email);
     }
 }

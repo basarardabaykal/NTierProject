@@ -48,8 +48,7 @@ export default function Login() {
         password: password,
       })
       if (response.data.success) {
-        login(response.data.data.token)
-        localStorage.setItem("user", JSON.stringify(response.data.data.userDTO))
+        login(response.data.data.token, response.data.data.userDTO)
         setIsError(false)
         setErrorMessage("Successfully logged in, you will be redirected shortly.")
         await new Promise((resolve) => setTimeout(resolve, 2000));

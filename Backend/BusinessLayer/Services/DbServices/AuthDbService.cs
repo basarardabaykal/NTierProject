@@ -1,11 +1,13 @@
 ﻿using BusinessLayer.Congrate.Repository;
 using BusinessLayer.Congrate.Services.DbServices;
+using BusinessLayer.Dto;
 using CoreLayer.Entity;
 using CoreLayer.Utilities.Interfaces;
 using CoreLayer.Utilities.Results;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +71,27 @@ namespace BusinessLayer.Services.DbServices
         public async Task<IDataResult<List<string>>> GetUserRoles(string email)
         {
             return await _authRepository.GetUserRoles(email);
+        }
+        public async Task<IDataResult<UserDTO>> GetUser(string email)
+        {
+            var result = await _authRepository.GetUserByEmail(email);
+            var user = result.Data;
+
+            var rolesResult = await GetUserRoles(email);
+            var roles = rolesResult.Data;
+
+            var userDTO = new UserDTO
+            {
+                Id = user.Id,
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                Tcnumber = user.Tcnumber,
+                Email = user.Email,
+                CompanyId = user.CompanyId,
+                Roles = roles,
+            };
+
+            return new SuccessDataResult<UserDTO>(userDTO);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Dto.Auth;
+﻿using BusinessLayer.Dto;
+using BusinessLayer.Dto.Auth;
 using CoreLayer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,6 @@ namespace BusinessLayer.Congrate.Services.ControllerServices
     {
         public Task<IDataResult<LoginResponseDTO>> Login(LoginRequestDTO loginDTO);
         public Task<IDataResult<RegisterResponseDTO>> Register(RegisterRequestDTO registerDTO);
-
+        public Task<IDataResult<UserDTO>> GetUser(string token);
     }
 }

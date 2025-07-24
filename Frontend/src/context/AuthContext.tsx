@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "../interfaces/User"
 import { jwtDecode } from "jwt-decode"
+import axios from "axios";
 
 interface DecodedToken {
   "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": string
@@ -13,7 +14,7 @@ interface DecodedToken {
 interface AuthContextType {
   user: User | null
   isAuthenticated: boolean;
-  login: (token: string) => void;
+  login: (token: string, user: User) => void;
   logout: () => void;
   isAdmin: () => boolean;
 }
@@ -25,52 +26,46 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      try {
-        const decoded: DecodedToken = jwtDecode(token)
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token")
+      if (token) {
+        try {
+          const decoded: DecodedToken = jwtDecode(token)
 
-        if (decoded.exp * 1000 < Date.now()) {
+          if (decoded.exp * 1000 < Date.now()) {
+            logout()
+            return
+          }
+
+          const response = await axios.post("https://localhost:7297/api/auth/get",
+            JSON.stringify(token), // send raw string
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+
+          if (!response.data.success) {
+            localStorage.removeItem("token")
+          }
+
+          const user = response.data.data
+
+          setUser(user)
+          setIsAuthenticated(true)
+        } catch (error) {
+          console.error("Invalid token")
           logout()
-          return
         }
-
-        const userData: User = {
-          id: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
-          email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
-          name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-          roles: Array.isArray(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"])
-            ? decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-            : [decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]],
-          tcnumber: "", // not in token
-          companyId: "" // not in token
-        }
-
-        setUser(userData)
-        setIsAuthenticated(true)
-      } catch (error) {
-        console.error("Invalid token")
-        logout()
       }
     }
+
+    fetchUser()
   }, []);
 
-  const login = (token: string) => {
+  const login = (token: string, user: User) => {
     localStorage.setItem("token", token)
-    const decoded: DecodedToken = jwtDecode(token)
-
-    const userData: User = {
-      id: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
-      email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"],
-      name: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-      roles: Array.isArray(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"])
-        ? decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-        : [decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]],
-      tcnumber: "",
-      companyId: ""
-    }
-
-    setUser(userData)
+    setUser(user)
     setIsAuthenticated(true)
   };
 
