@@ -5,7 +5,6 @@ import HomePage from './Pages/HomePage'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import UsersPanel from './Pages/UsersPanel'
-import Profile from './Pages/Profile'
 
 function App() {
 
@@ -20,7 +19,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
 
