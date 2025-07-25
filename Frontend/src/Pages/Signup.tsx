@@ -67,7 +67,7 @@ export default function Signup() {
       })
 
       if (response.data.success) {
-        login(response.data.data.token, response.data.data.userDTO)
+        login(response.data.data.token)
         window.dispatchEvent(new Event("storage"))
         setIsError(false)
         setErrorMessage("Successfully signed up, you will be redirected shortly")
