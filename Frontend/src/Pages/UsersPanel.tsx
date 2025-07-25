@@ -22,15 +22,18 @@ export default function UsersPanel() {
       }
 
       const response = await userService.getAll(token)
+      console.log(response.data.data)
 
       if (response.data.success) {
         const mappedUsers = response.data.data.map((user: any) => ({
           id: user.id,
-          name: user.firstname + " " + user.lastname,
+          firstName: user.firstname,
+          lastName: user.lastname,
           email: user.email,
           tcnumber: user.tcnumber,
           companyId: user.companyId
         }))
+        console.log(mappedUsers)
         setUsers(mappedUsers)
       }
     } catch (error) {
