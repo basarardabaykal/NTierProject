@@ -57,7 +57,7 @@ export default function CompanySelector({ companies, defaultCompanyId, onSave, i
           onClick={handleSave}
           disabled={isSaving}
           size="sm"
-          className="px-3"
+          className="px-3 ml-2"
         >
           {isSaving ? "Saving..." : "Save"}
         </Button>
