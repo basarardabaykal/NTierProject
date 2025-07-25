@@ -38,7 +38,7 @@ export default function UsersTable({ users, companies, onUpdateUserCompany }: Us
         <TableBody>
           {users.map((user, index) => (
             <TableRow key={index}>
-              <TableCell className="py-4 px-6">{user.name}</TableCell>
+              <TableCell className="py-4 px-6">{user.firstName + user.lastName}</TableCell>
               <TableCell className="py-4 px-6 font-medium">{user.email}</TableCell>
               <TableCell className="py-4 px-6">{user.tcnumber}</TableCell>
               <TableCell>
