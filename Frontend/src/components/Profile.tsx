@@ -11,10 +11,6 @@ export default function Profile({ isOpen, onClose }: ProfileProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
 
-  if (user == null) {
-    return <></>
-  }
-
   useEffect(() => {
     if (isOpen) {
       setShouldRender(true);
@@ -25,7 +21,7 @@ export default function Profile({ isOpen, onClose }: ProfileProps) {
     }
   }, [isOpen]);
 
-  if (!shouldRender) return null;
+  if (user == null || !shouldRender) return null;
 
   return (
     <div className={`fixed inset-0 z-50 flex items-end justify-center pb-24 transition-all duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'
