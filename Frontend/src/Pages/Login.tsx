@@ -15,6 +15,7 @@ import axios from "axios"
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod"
 import { useAuth } from "../context/AuthContext";
+import { authService } from "../services/authService";
 
 const loginSchema = z.object({
   email: z.email("Invalid email adress"),
@@ -43,11 +44,9 @@ export default function Login() {
     }
 
     try {
-      const response = await axios.post("https://localhost:7297/api/auth/login", {
-        email: email,
-        password: password,
-      })
+      const response = await authService.login(email, password)
       if (response.data.success) {
+        console.log(response.data.data.userDTO)
         login(response.data.data.token, response.data.data.userDTO)
         setIsError(false)
         setErrorMessage("Successfully logged in, you will be redirected shortly.")

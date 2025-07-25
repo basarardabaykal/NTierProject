@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import type { User } from "../interfaces/User"
 import type { Company } from "../interfaces/Company"
 import { userService } from "../services/userService"
+import { companyService } from "../services/companyService"
 
 export default function UsersPanel() {
   const navigate = useNavigate()
@@ -44,11 +45,11 @@ export default function UsersPanel() {
       const token = localStorage.getItem("token")
       if (!token) {
         navigate("/login")
+        return
       }
 
-      const response = await axios.get("https://localhost:7297/api/company/getall", {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
+      const response = await companyService.getAll(token)
+
       if (response.data.success) {
         const mappedCompanies = response.data.data.map((company: any) => ({
           name: company.name,
@@ -72,24 +73,7 @@ export default function UsersPanel() {
         return
       }
 
-      const response = await axios.patch(
-        "https://localhost:7297/api/home/updatecompany",
-        {
-          id: userId,
-          firstname: "placeholder",
-          lastname: "placeholder",
-          tcnumber: "11111111111",
-          email: "placeholder",
-          companyId: companyId,
-          roles: [
-            "placeholder"
-          ]
-        },
-        {
-          headers: { 'Authorization': `Bearer ${token}`, "Content-Type": "application/json" }
-
-        }
-      )
+      const response = await userService.updateCompany(token, userId, companyId)
 
       if (response.data.success) {
         setUsers(prevUsers =>

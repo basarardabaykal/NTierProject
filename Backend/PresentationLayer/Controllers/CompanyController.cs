@@ -5,6 +5,7 @@ using CoreLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NTierProject.Controllers
 {
@@ -42,6 +43,7 @@ namespace NTierProject.Controllers
                 return Ok("Kayıt esnasında bir hatayla karşılaşıldı.");
             }
         }
+        [Authorize]
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll()
         {

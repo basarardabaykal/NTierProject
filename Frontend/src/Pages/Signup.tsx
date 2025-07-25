@@ -15,6 +15,7 @@ import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
 import { Link, useNavigate } from "react-router-dom";
 import { set, z } from "zod"
+import { authService } from "../services/authService";
 
 const signupSchema = z.object({
   firstName: z.string("Invalid name"),
@@ -46,14 +47,7 @@ export default function Signup() {
     setIsError(false);
 
     const validation = signupSchema.safeParse({ firstName, lastName, tcNumber, email, password, confirmedPassword: confirmPassword, })
-    console.log({
-      firstName,
-      lastName,
-      tcNumber,
-      email,
-      password,
-      confirmedPassword: confirmPassword,
-    })
+
     if (!validation.success) {
       const issues = validation.error.issues
       const firstError = issues[0]?.message || "Invalid input"
@@ -63,18 +57,15 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post("https://localhost:7297/api/auth/register", {
+      const response = await authService.register({
         email: email,
         password: password,
         confirmPassword: confirmPassword,
         tcNumber: tcNumber,
         firstName: firstName,
         lastName: lastName,
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-        }
       })
+
       if (response.data.success) {
         login(response.data.data.token, response.data.data.userDTO)
         window.dispatchEvent(new Event("storage"))
