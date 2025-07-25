@@ -21,9 +21,7 @@ export default function UsersPanel() {
       }
 
       const response = await userService.getAll(token)
-      /*const response = await axios.get("https://localhost:7297/api/home/getall", {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })*/
+
       if (response.data.success) {
         const mappedUsers = response.data.data.map((user: any) => ({
           id: user.id,

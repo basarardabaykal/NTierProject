@@ -7,6 +7,6 @@ export const userService = {
         Authorization: `Bearer ${token}`,
       },
     })
-    return response.data
+    return response
   },
 }
