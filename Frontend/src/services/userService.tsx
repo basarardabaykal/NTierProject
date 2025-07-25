@@ -1,8 +1,10 @@
 import { api } from "./api"
 
+const CONTROLLER_NAME = "home"
+
 export const userService = {
   async getAll(token: string) {
-    const response = await api.get("/home/getall", {
+    const response = await api.get(`/${CONTROLLER_NAME}/getall`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -11,7 +13,7 @@ export const userService = {
   },
 
   async updateCompany(token: string, userId: string, companyId: string) {
-    const response = await api.patch("/home/updatecompany", {
+    const response = await api.patch(`/${CONTROLLER_NAME}/updatecompany`, {
       id: userId,
       firstname: "placeholder",
       lastname: "placeholder",
