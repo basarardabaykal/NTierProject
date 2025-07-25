@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import type { User } from "../interfaces/User"
 import type { Company } from "../interfaces/Company"
+import { userService } from "../services/userService"
 
 export default function UsersPanel() {
   const navigate = useNavigate()
@@ -13,13 +14,16 @@ export default function UsersPanel() {
 
   const getUsers = async () => {
     try {
-      const token = localStorage.getItem("token") //to be changed
+      const token = localStorage.getItem("token")
       if (!token) {
         navigate("/login")
+        return
       }
-      const response = await axios.get("https://localhost:7297/api/home/getall", {
+
+      const response = await userService.getAll(token)
+      /*const response = await axios.get("https://localhost:7297/api/home/getall", {
         headers: { 'Authorization': `Bearer ${token}` }
-      })
+      })*/
       if (response.data.success) {
         const mappedUsers = response.data.data.map((user: any) => ({
           id: user.id,
