@@ -5,5 +5,6 @@ export interface User {
     email: string
     tcnumber: string
     companyId: string
+    branchId: string
     roles: string[]
 }

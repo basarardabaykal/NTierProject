@@ -5,13 +5,16 @@ import { useState } from "react"
 import { useEffect } from "react"
 import type { User } from "../interfaces/User"
 import type { Company } from "../interfaces/Company"
+import type { Branch } from "../interfaces/Branch"
 import { userService } from "../services/userService"
 import { companyService } from "../services/companyService"
+import { branchService } from "../services/branchService"
 
 export default function UsersPanel() {
   const navigate = useNavigate()
   const [users, setUsers] = useState<User[]>([])
   const [companies, setCompanies] = useState<Company[]>([])
+  const [branches, setBranches] = useState<Branch[]>([])
 
   const getUsers = async () => {
     try {
@@ -22,7 +25,6 @@ export default function UsersPanel() {
       }
 
       const response = await userService.getAll(token)
-      console.log(response.data.data)
 
       if (response.data.success) {
         const mappedUsers = response.data.data.map((user: any) => ({
@@ -33,7 +35,6 @@ export default function UsersPanel() {
           tcnumber: user.tcnumber,
           companyId: user.companyId
         }))
-        console.log(mappedUsers)
         setUsers(mappedUsers)
       }
     } catch (error) {
@@ -60,6 +61,33 @@ export default function UsersPanel() {
         }))
         setCompanies(mappedCompanies)
       }
+
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        navigate("/login")
+      }
+    }
+  }
+
+  const getBranches = async () => {
+    try {
+      const token = localStorage.getItem("token")
+      if (!token) {
+        navigate("/login")
+        return
+      }
+
+      const response = await branchService.getAll(token)
+
+      if (response.data.success) {
+        const mappedBranches = response.data.data.map((branch: any) => ({
+          name: branch.name,
+          id: branch.id,
+        }))
+        setBranches(mappedBranches)
+      }
+
+      console.log(response.data)
 
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
@@ -98,6 +126,7 @@ export default function UsersPanel() {
   useEffect(() => {
     getCompanies()
     getUsers()
+    getBranches()
   }, [])
 
 
