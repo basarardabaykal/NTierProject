@@ -1,18 +1,29 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table"
 import type { User } from "../interfaces/User"
 import type { Company } from "../interfaces/Company"
+import type { Branch } from "../interfaces/Branch"
 import CompanySelector from "./CompanySelector"
+import BranchSelector from "./BranchSelector"
 import { useState, useEffect } from "react"
 import { useAuth } from "../context/AuthContext"
 
 interface UsersTableProps {
   users: User[]
   companies: Company[]
+  branches: Branch[]
   onUpdateUserCompany: (userId: string, companyId: string) => Promise<void>
+  onUpdateUserBranch: (userId: string, branchId: string) => Promise<void>
 }
 
-export default function UsersTable({ users, companies, onUpdateUserCompany }: UsersTableProps) {
+export default function UsersTable({
+  users,
+  companies,
+  branches,
+  onUpdateUserCompany,
+  onUpdateUserBranch
+}: UsersTableProps) {
   const [savingUserId, setSavingUserId] = useState<string | null>(null)
+  const [savingType, setSavingType] = useState<'company' | 'branch' | null>(null)
   const [animateRows, setAnimateRows] = useState(false)
   const { isAdmin } = useAuth()
 
@@ -21,12 +32,25 @@ export default function UsersTable({ users, companies, onUpdateUserCompany }: Us
     return () => clearTimeout(timer)
   }, [])
 
-  const handleSave = async (userId: string, newCompanyId: string) => {
+  const handleSaveCompany = async (userId: string, newCompanyId: string) => {
     setSavingUserId(userId)
+    setSavingType('company')
     try {
       await onUpdateUserCompany(userId, newCompanyId)
     } finally {
       setSavingUserId(null)
+      setSavingType(null)
+    }
+  }
+
+  const handleSaveBranch = async (userId: string, newBranchId: string) => {
+    setSavingUserId(userId)
+    setSavingType('branch')
+    try {
+      await onUpdateUserBranch(userId, newBranchId)
+    } finally {
+      setSavingUserId(null)
+      setSavingType(null)
     }
   }
 
@@ -47,6 +71,9 @@ export default function UsersTable({ users, companies, onUpdateUserCompany }: Us
               </TableHead>
               <TableHead className="py-6 px-8 text-sm font-semibold text-gray-700 tracking-wide">
                 Company
+              </TableHead>
+              <TableHead className="py-6 px-8 text-sm font-semibold text-gray-700 tracking-wide">
+                Branch
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -101,17 +128,44 @@ export default function UsersTable({ users, companies, onUpdateUserCompany }: Us
                 <TableCell className="py-5 px-8 transition-all duration-300 group-hover:px-10">
                   <div className="transform transition-all duration-300 group-hover:scale-105">
                     {isAdmin() ? (
-                      <div className={`transition-all duration-500 ${savingUserId === user.id ? 'animate-pulse' : ''}`}>
+                      <div className={`transition-all duration-500 ${savingUserId === user.id && savingType === 'company' ? 'animate-pulse' : ''
+                        }`}>
                         <CompanySelector
                           companies={companies}
                           defaultCompanyId={user.companyId}
-                          onSave={(newCompanyId) => handleSave(user.id, newCompanyId)}
-                          isSaving={savingUserId === user.id}
+                          onSave={(newCompanyId) => handleSaveCompany(user.id, newCompanyId)}
+                          isSaving={savingUserId === user.id && savingType === 'company'}
                         />
                       </div>
                     ) : (
                       <div className="inline-flex items-center px-4 py-2 text-sm hover:text-lg font-medium text-blue-700 bg-blue-50/70 rounded-lg transition-all duration-300 group-hover:bg-blue-100/70 group-hover:text-blue-800 group-hover:shadow-sm">
-                        {companies.find(company => company.id === user.companyId)?.name || 'No Company'}
+                        {companies?.find(company => company.id === user.companyId)?.name || 'No Company'}
+                      </div>
+                    )}
+                  </div>
+                </TableCell>
+                <TableCell className="py-5 px-8 transition-all duration-300 group-hover:px-10">
+                  <div className="transform transition-all duration-300 group-hover:scale-105">
+                    {isAdmin() ? (
+                      <div className={`transition-all duration-500 ${savingUserId === user.id && savingType === 'branch' ? 'animate-pulse' : ''
+                        }`}>
+                        {
+                          (() => {
+                            const filteredBranches = branches.filter(branch => String(branch.companyId) === String(user.companyId));
+                            return (
+                              <BranchSelector
+                                branches={filteredBranches}
+                                defaultBranchId={user.branchId}
+                                onSave={(newBranchId: string) => handleSaveBranch(user.id, newBranchId)}
+                                isSaving={savingUserId === user.id && savingType === 'branch'}
+                              />
+                            )
+                          })()
+                        }
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center px-4 py-2 text-sm hover:text-lg font-medium text-green-700 bg-green-50/70 rounded-lg transition-all duration-300 group-hover:bg-green-100/70 group-hover:text-green-800 group-hover:shadow-sm">
+                        {branches?.find(branch => branch.id === user.branchId)?.name || 'No Branch'}
                       </div>
                     )}
                   </div>

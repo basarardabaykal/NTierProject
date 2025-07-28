@@ -33,7 +33,8 @@ export default function UsersPanel() {
           lastName: user.lastname,
           email: user.email,
           tcnumber: user.tcnumber,
-          companyId: user.companyId
+          companyId: user.companyId,
+          branchId: user.branchId,
         }))
         setUsers(mappedUsers)
       }
@@ -83,11 +84,10 @@ export default function UsersPanel() {
         const mappedBranches = response.data.data.map((branch: any) => ({
           name: branch.name,
           id: branch.id,
+          companyId: branch.companyId,
         }))
         setBranches(mappedBranches)
       }
-
-      console.log(response.data)
 
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
@@ -133,7 +133,7 @@ export default function UsersPanel() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 w-full">
       <p className="mb-8 text-4xl font-extrabold tracking-tight text-gray-800 dark:text-white">Users Table</p>
-      <UsersTable users={users} companies={companies} onUpdateUserCompany={updateUserCompany} />
+      <UsersTable users={users} companies={companies} branches={branches} onUpdateUserBranch={updateUserCompany} onUpdateUserCompany={updateUserCompany} />
     </div>
   )
 }
