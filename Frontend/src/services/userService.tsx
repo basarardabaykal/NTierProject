@@ -19,7 +19,27 @@ export const userService = {
       lastname: "placeholder",
       tcnumber: "11111111111",
       email: "placeholder",
+      branchId: null,
       companyId: companyId,
+      roles: [
+        "placeholder"
+      ]
+    },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+    return response
+  },
+
+  async updateBranch(token: string, userId: string, branchId: string) {
+    const response = await api.patch(`/${CONTROLLER_NAME}/updatebranch`, {
+      id: userId,
+      firstname: "placeholder",
+      lastname: "placeholder",
+      tcnumber: "11111111111",
+      email: "placeholder",
+      branchId: branchId,
+      companyId: null,
       roles: [
         "placeholder"
       ]

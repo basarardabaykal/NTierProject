@@ -28,5 +28,10 @@ namespace BusinessLayer.Services.ControllerServices
             var result = await _dbService.UpdateCompanyId(userDTO);
             return new SuccessDataResult<UserDTO>(result.Message);
         }
+        public async Task<IDataResult<UserDTO>> UpdateBranchId(UserDTO userDTO)
+        {
+            var result = await _dbService.UpdateBranchId(userDTO);
+            return new SuccessDataResult<UserDTO>(result.Message);
+        }
     }
 }

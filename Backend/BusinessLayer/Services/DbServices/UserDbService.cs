@@ -24,5 +24,11 @@ namespace BusinessLayer.Services.DbServices
             var result = await _repo.UpdateCompanyId(user);
             return new SuccessDataResult<UserDTO>(result.Message);
         }
+        public async Task<IDataResult<UserDTO>> UpdateBranchId(UserDTO userDTO)
+        {
+            AppUser user = _mapper.Map<AppUser>(userDTO);
+            var result = await _repo.UpdateBranchId(user);
+            return new SuccessDataResult<UserDTO>(result.Message);
+        }
     }
 }

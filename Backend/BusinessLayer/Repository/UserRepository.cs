@@ -36,6 +36,21 @@ namespace BusinessLayer.Repository
             return new SuccessDataResult<AppUser>("Kullanıcı başarıyla güncellendi.");
 
         }
+        public async Task<IDataResult<AppUser>> UpdateBranchId(AppUser user)
+        {
+            var existingUser = await _dbSet.FirstOrDefaultAsync(x => x.Id == user.Id);
+            if (existingUser == null)
+            {
+                return new ErrorDataResult<AppUser>(404, "Kullanıcı bulunamadı.");
+            }
+
+            existingUser.BranchId = user.BranchId;
+            _dbContext.Update(existingUser);
+            await _dbContext.SaveChangesAsync();
+
+            return new SuccessDataResult<AppUser>("Kullanıcı başarıyla güncellendi.");
+
+        }
     }
 }
 

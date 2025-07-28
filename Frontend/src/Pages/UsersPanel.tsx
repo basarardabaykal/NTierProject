@@ -123,6 +123,33 @@ export default function UsersPanel() {
     }
   }
 
+  const updateUserBranch = async (userId: string, branchId: string) => {
+    try {
+      const token = localStorage.getItem("token")
+      if (!token) {
+        navigate("/login")
+        return
+      }
+
+      const response = await userService.updateBranch(token, userId, branchId)
+
+      if (response.data.success) {
+        setUsers(prevUsers =>
+          prevUsers.map(user =>
+            user.id === userId
+              ? { ...user, branchId: branchId }
+              : user
+          )
+        )
+      } else {
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        navigate("/login")
+      }
+    }
+  }
+
   useEffect(() => {
     getCompanies()
     getUsers()
@@ -133,7 +160,7 @@ export default function UsersPanel() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 w-full">
       <p className="mb-8 text-4xl font-extrabold tracking-tight text-gray-800 dark:text-white">Users Table</p>
-      <UsersTable users={users} companies={companies} branches={branches} onUpdateUserBranch={updateUserCompany} onUpdateUserCompany={updateUserCompany} />
+      <UsersTable users={users} companies={companies} branches={branches} onUpdateUserBranch={updateUserBranch} onUpdateUserCompany={updateUserCompany} />
     </div>
   )
 }

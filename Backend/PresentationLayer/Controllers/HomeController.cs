@@ -76,5 +76,16 @@ namespace NTierProject.Controllers
                 StatusCode = result.StatusCode,
             };     
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPatch("updatebranch")]
+        public async Task<IActionResult> UpdateBranchId([FromBody] UserDTO userDTO)
+        {
+            var result = await _controllerService.UpdateBranchId(userDTO);
+            return new ObjectResult(result)
+            {
+                StatusCode = result.StatusCode,
+            };
+        }
     }
 }
