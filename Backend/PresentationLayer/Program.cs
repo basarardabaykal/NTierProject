@@ -23,6 +23,7 @@ using System.Reflection;
 using System.Text;
 using DotNetEnv;
 using DataLayer;
+using BusinessLayer.Congrate.Services;
 
 //serilog
 Log.Logger = new LoggerConfiguration()
@@ -63,6 +64,9 @@ builder.Services.AddScoped(typeof(IGenericControllerService<UserDTO>), typeof(Us
 builder.Services.AddScoped(typeof(IGenericRepository<Company>), typeof(CompanyRepository));
 builder.Services.AddScoped(typeof(IGenericDbService<CompanyDTO>), typeof(CompanyDbService));
 builder.Services.AddScoped(typeof(IGenericControllerService<CompanyDTO>), typeof(CompanyControllerService));
+builder.Services.AddScoped(typeof(IGenericRepository<Branch>), typeof(BranchRepository));
+builder.Services.AddScoped(typeof(IGenericDbService<BranchDTO>), typeof(BranchDbService));
+builder.Services.AddScoped(typeof(IGenericControllerService<BranchDTO>), typeof(BranchControllerService));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserDbService, UserDbService>();
 builder.Services.AddScoped<IUserControllerService, UserControllerService>();
@@ -72,6 +76,9 @@ builder.Services.AddScoped<ICompanyControllerService, CompanyControllerService>(
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthDbService, AuthDbService>();
 builder.Services.AddScoped<IAuthControllerService, AuthControllerService>();
+builder.Services.AddScoped<IBranchRepository, BranchRepository>();
+builder.Services.AddScoped<IBranchDbService, BranchDbService>();
+builder.Services.AddScoped<IBranchControllerService, BranchControllerService>();
 
 
 //fluent validation

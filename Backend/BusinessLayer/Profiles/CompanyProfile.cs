@@ -15,7 +15,8 @@ namespace BusinessLayer.Profiles
         {
             CreateMap<Company, CompanyDTO>()
                 .ReverseMap()
-                .ForMember(dest => dest.Employees, opt => opt.MapFrom(src => src.Employees)); ;
+                .ForMember(dest => dest.Employees, opt => opt.MapFrom(src => src.Employees))
+                .ForMember(dest => dest.Branches, opt => opt.MapFrom(src => src.Branches));
         }
     }
 }

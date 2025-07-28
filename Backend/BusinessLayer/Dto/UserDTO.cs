@@ -14,5 +14,6 @@ public class UserDTO
     public string Tcnumber { get; set; }
     public string Email { get; set; }
     public Guid? CompanyId { get; set; }
+    public Guid? BranchId { get; set; }
     public List<string> Roles { get; set; }
 }

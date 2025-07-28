@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Congrate.Services.ControllerServices
 {
-    public interface IGenericControllerService<T>
+    public interface IGenericControllerService<TDto>
     {
       
-        Task<IDataResult<T>> Get(Guid id);
+        Task<IDataResult<TDto>> Get(Guid id);
 
-        public Task Add(T dto);
-        public Task<IDataResult<List<T>>> GetAll();
+        public Task Add(TDto dto);
+        public Task<IDataResult<List<TDto>>> GetAll();
 
     }
 }
