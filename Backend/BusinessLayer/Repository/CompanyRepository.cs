@@ -15,6 +15,6 @@ namespace BusinessLayer.Repository
 {
     public class CompanyRepository : GenericRepository<Company>, ICompanyRepository
     {
-        public CompanyRepository(DataLayer.DbContext dbContext) : base(dbContext) { }
+        public CompanyRepository(AppDbContext dbContext) : base(dbContext) { }
     }
 }

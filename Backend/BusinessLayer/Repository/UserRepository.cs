@@ -20,7 +20,7 @@ namespace BusinessLayer.Repository
 {
     public class UserRepository : GenericRepository<AppUser>, IUserRepository
     {
-        public UserRepository(DataLayer.DbContext dbContext) : base (dbContext) { }
+        public UserRepository(AppDbContext dbContext) : base (dbContext) { }
         public async Task<IDataResult<AppUser>> UpdateCompanyId(AppUser user)
         {
             var existingUser = await _dbSet.FirstOrDefaultAsync(x => x.Id == user.Id);

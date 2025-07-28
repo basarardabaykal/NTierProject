@@ -22,6 +22,7 @@ using System;
 using System.Reflection;
 using System.Text;
 using DotNetEnv;
+using DataLayer;
 
 //serilog
 Log.Logger = new LoggerConfiguration()
@@ -54,7 +55,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddRazorRuntimeCompilation();
 
 //dependency injection
-builder.Services.AddDbContext<DataLayer.DbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped(typeof(IGenericRepository<AppUser>), typeof(UserRepository));
 builder.Services.AddScoped(typeof(IGenericDbService<UserDTO>), typeof(UserDbService));
@@ -89,7 +90,7 @@ builder.Services.AddIdentityCore<AppUser>(options =>
     options.User.RequireUniqueEmail = true;
 })
     .AddRoles<IdentityRole<Guid>>()
-    .AddEntityFrameworkStores<DataLayer.DbContext>()
+    .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
 //authentication

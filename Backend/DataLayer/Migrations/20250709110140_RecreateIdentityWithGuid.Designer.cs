@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DataLayer.Migrations
 {
-    [DbContext(typeof(DbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20250709110140_RecreateIdentityWithGuid")]
     partial class RecreateIdentityWithGuid
     {

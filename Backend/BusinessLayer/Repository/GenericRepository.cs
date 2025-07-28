@@ -8,15 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.Congrate.Repository;
+using DataLayer;
 
 namespace BusinessLayer.Repository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity :class,  IBaseEntity
     {
-        protected readonly DataLayer.DbContext _dbContext;
+        protected readonly AppDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(DataLayer.DbContext dbContext)
+        public GenericRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();

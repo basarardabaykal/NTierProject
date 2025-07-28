@@ -13,7 +13,8 @@ namespace CoreLayer.Entity
         public string Lastname { get; set; }
         public string Tcnumber { get; set; }
         public Guid? CompanyId { get; set; }
+        public Guid? BranchId { get; set; }
         public Company? Company { get; set; }
-
+        public Branch? Branch { get; set; }
     }
 }
