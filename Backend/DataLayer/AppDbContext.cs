@@ -20,12 +20,14 @@ namespace DataLayer
 
         public DbSet<AppUser> users { get; set; }
         public DbSet<Company> companies { get; set; }
-        public DbSet<Branch> Branches { get; set; }
+        public DbSet<Branch> branches { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<AppUser>().ToTable("AspNetUsers");
 
             builder.Entity<Company>()
                 .HasMany(c => c.Employees)

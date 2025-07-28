@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Design;
 using System.IO;
+using DotNetEnv;
 
 namespace DataLayer
 {
@@ -14,16 +15,16 @@ namespace DataLayer
     {
         public AppDbContext CreateDbContext(string[] args)
         {
+            var envPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "PresentationLayer", ".env");
+            DotNetEnv.Env.Load(envPath);
+
             IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "..", "PresentationLayer"))
-                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
                 .Build();
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseNpgsql(connectionString);
-
             return new AppDbContext(optionsBuilder.Options);
         }
     }
