@@ -13,8 +13,10 @@ export default function Profile({ isOpen, onClose }: ProfileProps) {
 
   useEffect(() => {
     if (isOpen) {
-      setShouldRender(true);
-      setTimeout(() => setIsVisible(true), 10);
+      if (user) {
+        setShouldRender(true);
+        setTimeout(() => setIsVisible(true), 10);
+      }
     } else {
       setIsVisible(false);
       setTimeout(() => setShouldRender(false), 300);
