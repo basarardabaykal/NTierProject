@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import { href, Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import { useTheme } from "../context/ThemeContext"
 import { FloatingDock } from "./ui/floating-dock"
-import { IconHome, IconUser, IconLogin2, IconLogout2, IconTable } from "@tabler/icons-react";
+import { IconHome, IconUser, IconLogin2, IconLogout2, IconTable, IconBrightnessDownFilled, IconBrightnessDown } from "@tabler/icons-react";
 import Profile from "./Profile";
 
 
 export default function Navbar() {
   const navigate = useNavigate()
   const { isAuthenticated, logout } = useAuth()
+  const { darkMode, toggleDarkMode } = useTheme()
   const [showProfile, setShowProfile] = useState<boolean>(false)
 
   useEffect(() => {
@@ -69,6 +71,23 @@ export default function Navbar() {
                   navigate("/login")
                 }
               },
+
+            darkMode ?
+              {
+                title: "Bright Mode",
+                icon: <IconBrightnessDownFilled className="w-full h-full" />,
+                onClick: () => {
+                  toggleDarkMode()
+                }
+              } :
+              {
+                title: "Dark Mode",
+                icon: <IconBrightnessDown className="w-full h-full" />,
+                onClick: () => {
+                  toggleDarkMode()
+                }
+              },
+
           ]}
         ></FloatingDock >
       </div>
