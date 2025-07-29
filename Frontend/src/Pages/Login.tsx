@@ -46,7 +46,6 @@ export default function Login() {
     try {
       const response = await authService.login(email, password)
       if (response.data.success) {
-        console.log(response.data.data.userDTO)
         login(response.data.data.token)
         setIsError(false)
         setErrorMessage("Successfully logged in, you will be redirected shortly.")
