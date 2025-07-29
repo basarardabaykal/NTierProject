@@ -12,7 +12,7 @@ using Sprache;
 using System.Security.Claims;
 
 
-namespace NTierProject.Controllers
+namespace PresentationLayer.Controllers
 {
 
     [ApiController]

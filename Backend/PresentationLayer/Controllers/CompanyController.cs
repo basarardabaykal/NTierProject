@@ -7,7 +7,7 @@ using Microsoft.Identity.Client;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
 
-namespace NTierProject.Controllers
+namespace PresentationLayer.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
