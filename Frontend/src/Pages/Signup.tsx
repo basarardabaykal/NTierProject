@@ -80,7 +80,15 @@ export default function Signup() {
       }
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        setErrorMessage(error.response?.data?.message || error.message)
+        const data = error.response?.data;
+        if (data?.errors && typeof data.errors === "object") {
+          const allErrors = Object.values(data.errors).flat() as string[];
+          setErrorMessage(allErrors[0] || "Validation error");
+        } else if (data?.title) {
+          setErrorMessage(data.title);
+        } else {
+          setErrorMessage(error.message);
+        }
       } else if (error instanceof Error) {
         setErrorMessage(error.message)
       } else {
