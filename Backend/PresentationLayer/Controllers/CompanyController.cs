@@ -19,8 +19,8 @@ namespace NTierProject.Controllers
             _controllerService = controllerService;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
-
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var result = await _controllerService.Get(id);
@@ -30,6 +30,7 @@ namespace NTierProject.Controllers
             };
         }
 
+        [Authorize]
         [HttpPost("add")]
         public async Task<IActionResult> AddCompany([FromBody] CompanyDTO companyDTO)
         {

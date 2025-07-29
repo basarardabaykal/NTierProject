@@ -23,7 +23,7 @@ namespace PresentationLayer.Controllers
             _controllerService = controllerService;
         }
 
-
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBranch(Guid id)
         {
@@ -33,7 +33,7 @@ namespace PresentationLayer.Controllers
                 StatusCode = result.StatusCode
             };
         }
-
+        [Authorize]
         [HttpPost("add")]
         public async Task<IActionResult> AddBranch([FromBody] BranchDTO branchDTO)
         {

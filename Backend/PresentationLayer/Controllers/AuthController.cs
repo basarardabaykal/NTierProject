@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Congrate.Services.ControllerServices;
-using Microsoft.AspNetCore.Mvc;
 using BusinessLayer.Dto.Auth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace PresentationLayer.Controllers
@@ -35,6 +36,7 @@ namespace PresentationLayer.Controllers
                 StatusCode = result.StatusCode,
             };
         }
+        [Authorize]
         [HttpPost("get")]
         public async Task<IActionResult> Get([FromBody] string jwtToken)
         {

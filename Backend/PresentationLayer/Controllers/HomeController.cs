@@ -39,7 +39,7 @@ namespace NTierProject.Controllers
             };
         }
 
-
+        [Authorize]
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] UserDTO userDTO)
         {
