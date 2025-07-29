@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using NTierProject.Controllers;
+using PresentationLayer.Controllers;
 using NTierProject.Middlewares;
 using Serilog;
 using System;

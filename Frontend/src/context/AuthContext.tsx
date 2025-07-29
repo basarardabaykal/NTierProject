@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           {
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
             },
           })
 
@@ -53,6 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           email: userData.email,
           tcnumber: userData.tcnumber,
           companyId: userData.companyId,
+          branchId: userData.branchId,
           roles: userData.roles,
         };
 
