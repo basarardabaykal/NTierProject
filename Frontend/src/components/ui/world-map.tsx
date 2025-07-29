@@ -34,9 +34,9 @@ export default function WorldMap({
   const svgMap = useMemo(() => {
     return map.getSVG({
       radius: 0.22,
-      color: isDark ? "#FFFFFF40" : "#00000040",
+      color: "#00000040",
       shape: "circle",
-      backgroundColor: isDark ? "black" : "white",
+      backgroundColor: "white",
     });
   }, [map, isDark]);
 
@@ -118,7 +118,7 @@ export default function WorldMap({
   return (
     <div
       ref={containerRef}
-      className="w-full aspect-[2/1] dark:bg-black bg-white rounded-lg relative font-sans"
+      className="w-full aspect-[2/1]  bg-white rounded-lg relative font-sans"
     >
       <img
         src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
