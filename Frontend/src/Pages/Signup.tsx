@@ -72,7 +72,7 @@ export default function Signup() {
         setIsError(false)
         setErrorMessage("Successfully signed up, you will be redirected shortly")
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        navigate("/")
+        navigate("/panel")
       }
       else {
         setErrorMessage("Signing up failed")

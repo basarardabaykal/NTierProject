@@ -41,7 +41,7 @@ export default function Navbar() {
               }
             },
             {
-              title: "IconTable",
+              title: "Panel",
               icon: <IconTable className="w-full h-full" />,
               onClick: () => {
                 navigate("/panel")
