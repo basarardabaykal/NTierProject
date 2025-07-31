@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "../interfaces/User"
 import { jwtDecode } from "jwt-decode"
 import axios from "axios";
+import { toast } from "react-hot-toast"
 
 interface DecodedToken {
   exp: number
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           })
 
         if (!response.data.success) {
+          toast.error("An unexpected error occured.")
           localStorage.removeItem("token")
         }
 
@@ -61,7 +63,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setUser(user)
         setIsAuthenticated(true)
       } catch (error) {
-        console.error("Invalid token")
         logout()
       }
     }

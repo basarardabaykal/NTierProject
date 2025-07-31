@@ -5,14 +5,14 @@ import HomePage from './Pages/HomePage'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import UsersPanel from './Pages/UsersPanel'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
   return (
     <>
-
+      <Toaster position="top-right" />
       <Navbar></Navbar>
-
       <div className='m-auto'>
         <Routes>
           <Route path="/panel" element={<UsersPanel />} />
@@ -21,7 +21,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
-
     </>
   )
 }

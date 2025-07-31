@@ -1,4 +1,5 @@
 import { api } from "./api"
+import { toast } from "react-hot-toast"
 
 const CONTROLLER_NAME = "home"
 
@@ -9,6 +10,9 @@ export const userService = {
         Authorization: `Bearer ${token}`,
       },
     })
+    if (!response.data.success) {
+      toast.error("An unexpected error occured.");
+    }
     return response
   },
 
@@ -28,6 +32,9 @@ export const userService = {
       {
         headers: { Authorization: `Bearer ${token}` },
       })
+    if (!response.data.success) {
+      toast.error("An unexpected error occured.");
+    }
     return response
   },
 
@@ -47,6 +54,9 @@ export const userService = {
       {
         headers: { Authorization: `Bearer ${token}` },
       })
+    if (!response.data.success) {
+      toast.error("An unexpected error occured.");
+    }
     return response
   }
 }

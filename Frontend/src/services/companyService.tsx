@@ -1,4 +1,5 @@
 import { api } from "./api";
+import { toast } from "react-hot-toast"
 
 const CONTROLLER_NAME = "company"
 
@@ -9,6 +10,9 @@ export const companyService = {
         Authorization: `Bearer ${token}`
       }
     })
+    if (!response.data.success) {
+      toast.error("An unexpected error occured.");
+    }
     return response
   }
 }
